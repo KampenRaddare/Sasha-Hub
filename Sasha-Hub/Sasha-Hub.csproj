@@ -72,7 +72,7 @@
     <Compile Include="Commands\Find.cs" />
     <Compile Include="Commands\Get.cs" />
     <Compile Include="Commands\Help.cs" />
-    <Compile Include="Commands\make.cs" />
+    <Compile Include="Commands\Make.cs" />
     <Compile Include="Sasha.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
