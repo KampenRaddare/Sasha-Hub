@@ -8,5 +8,8 @@
             return "The US stock market is down more than 2.3 trillion dollars this year.";
             // ^ Sounds like a joke but it's true xD Gg economy
         }
+        internal static string Stocks(string stock) {
+            return $"{stock} looks like its doing good. Kinda looks like a mountain!";
+        }
     }
 }

@@ -23,10 +23,7 @@ namespace Sasha_Hub
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void button_Copy6_Click(object sender,RoutedEventArgs e) {
-            Sasha.Interpret("anus bleed help define joke COCK COCK COCK");
+            Loading.Image = Properties.Resources.SashaLoading;
         }
     }
 }
