@@ -1,6 +1,7 @@
 ﻿namespace Sasha_Hub {
     using System;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using Sasha_Hub.Commands;
     internal sealed class IntCmd {
         internal IntCmd(Sasha.Token[] tokens,Sasha.Callback callback) {
@@ -13,10 +14,10 @@
     internal static class Sasha {
         private const string knowHowDo = "I can't do that. Fuck you buddy.";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
-        private const string errorString = "ERROR";
+        private const string errorString = "error";
         internal delegate string Callback(sbyte[] n, string[] t);
         internal enum Token {paramater = 0, help, define, find, get, make, calculate, stocks, joke, weather};
-        internal static readonly string[] ignoreWords = new string[] {"and","fucking","do","ayy","lmao"};
+        internal static readonly string[] ignoreStrings = new string[] {"and","fucking","do","ayy","lmao"};
         private static readonly IntCmd[] Commands = new IntCmd[]{
             new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t) {
                 Help.OpenWindow();
@@ -54,7 +55,7 @@
         internal static string Interpret(string command) {
             if(command != null) {
                 command = command.Trim();
-                foreach(string replaceWord in ignoreWords) {
+                foreach(string replaceWord in ignoreStrings) {
                     command.Replace(replaceWord,"");
                 }
                 if(command != "") {
@@ -64,7 +65,7 @@
                     for(byte i = 0;i<tokens.Length;i+=1) {
                         try {
                             if(!tokens[i].All(char.IsDigit)) {
-                                numericalTokens[i] = (sbyte)(Token)Enum.Parse(typeof(Token), tokens[i],true);
+                                numericalTokens[i] = (sbyte)(Token)Enum.Parse(typeof(Token), Regex.Replace(tokens[i],"\\p{P}+", ""),true);
                                 finalTokens[i] = (Token)numericalTokens[i];
                             } else {
                                 numericalTokens[i] = (sbyte)-i;
