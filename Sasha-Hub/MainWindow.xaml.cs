@@ -23,6 +23,7 @@ namespace Sasha_Hub
         public MainWindow()
         {
             InitializeComponent();
+            Loading.Image = Properties.Resources.SashaLoading;
         }
     }
 }
