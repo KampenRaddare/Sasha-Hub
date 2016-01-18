@@ -15,9 +15,9 @@
         private const string knowHowDo = "I can't do that. Fuck you buddy.";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         private const string errorString = "error";
-        internal delegate string Callback(sbyte[] n, string[] t);
-        internal enum Token {paramater = 0, help, define, find, get, make, calculate, stocks, joke, weather};
-        internal static readonly string[] ignoreStrings = new string[] {"and","fucking","do","ayy","lmao"};
+        private delegate string Callback(sbyte[] n, string[] t);
+        private enum Token {paramater = 0, help, define, find, get, make, calculate, stocks, joke, weather};
+        private static readonly string[] ignoreStrings = new string[] {"and","fucking","do","ayy","lmao"};
         private static readonly IntCmd[] Commands = new IntCmd[]{
             new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t) {
                 Help.OpenWindow();

@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Sasha_Hub
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            Loading.Image = Properties.Resources.SashaLoading;
+            Loading.Image = Sasha_Hub.Resources.SashaLoading;
+        }
+        public void ToggleLoading()
+        {
+            if(Loading.Visible) {
+                Loading.Visible = false;
+                image.Visibility = Visibility.Visible;
+            } else {
+                Loading.Visible = true;
+                image.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
