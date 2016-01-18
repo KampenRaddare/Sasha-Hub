@@ -22,7 +22,7 @@ namespace Sasha_Hub {
         private const string knowHowDo = "I can't do that. Fuck you buddy.";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         internal delegate string Callback(sbyte[] n, string[] t);
-        internal enum Token {help = 1, define, find, get, make, calculate, stocks, joke, weather};
+        internal enum Token {help = 1, define, find, get, make, calculate, stocks, joke, weather}; //FOR THE LOVE OF GOD DO NOT SET THE FIRST NUMBER TO 0 LEAVE IT AT 1
         private static readonly IntCmd[] Commands = new IntCmd[]{
             new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t) {
                 Help.OpenWindow();
