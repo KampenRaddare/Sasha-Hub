@@ -9,6 +9,7 @@
 //this shall forever exist if you come back and few this commit sometime in the future..
 namespace Sasha_Hub {
     using System;
+    using System.Linq;
     using Sasha_Hub.Commands;
     internal sealed class IntCmd { //Internal Command - Only used by Sasha
         internal IntCmd(Sasha.Token[] tokens,Sasha.Callback callback) {
@@ -22,20 +23,21 @@ namespace Sasha_Hub {
         private const string knowHowDo = "I can't do that. Fuck you buddy.";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         internal delegate string Callback(sbyte[] n, string[] t);
-        internal enum Token {help = 1, define, find, get, make, calculate, stocks, joke, weather}; //FOR THE LOVE OF GOD DO NOT SET THE FIRST NUMBER TO 0 LEAVE IT AT 1
+        internal enum Token {paramater = 0, help, define, find, get, make, calculate, stocks, joke, weather}; //FOR THE LOVE OF GOD DO NOT SET THE FIRST NUMBER TO 0 LEAVE IT AT 1
+        internal static readonly string[] ignoreWords = new string[] {"and","fucking","do","ayy","lmao"};
         private static readonly IntCmd[] Commands = new IntCmd[]{
             new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t) {
                 Help.OpenWindow();
                 return null;
             }),
-            new IntCmd(new Token[]{Token.help,0},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.help,Token.paramater},delegate(sbyte[] n, string[] t) {
                 Help.OpenWindow(t[-n[1]]);
                 return null;
             }),
-            new IntCmd(new Token[]{Token.define,0},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.define,Token.paramater},delegate(sbyte[] n, string[] t) {
                 return Define.Word(t[-n[1]]);
             }),
-            new IntCmd(new Token[]{Token.find,0},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.find,Token.paramater},delegate(sbyte[] n, string[] t) {
                 return Define.Word(t[-n[1]]);
             }),
             new IntCmd(new Token[]{Token.get,Token.weather},delegate(sbyte[] n, string[] t) {
@@ -44,16 +46,16 @@ namespace Sasha_Hub {
             new IntCmd(new Token[]{Token.get,Token.stocks},delegate(sbyte[] n, string[] t) {
                 return Get.Stocks();
             }),
-            new IntCmd(new Token[]{Token.get,Token.stocks,0},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.get,Token.stocks,Token.paramater},delegate(sbyte[] n, string[] t) {
                 return Get.Stocks(t[-n[1]]);
             }),
             new IntCmd(new Token[]{Token.make,Token.joke},delegate(sbyte[] n, string[] t) {
                 return Make.Joke();
             }),
-            new IntCmd(new Token[]{Token.calculate,0,0},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.calculate,Token.paramater,Token.paramater},delegate(sbyte[] n, string[] t) {
                 return Calculate.AllOperations(t[-n[1]],t[-n[2]]);
             }),
-            new IntCmd(new Token[]{Token.calculate,0,0,0},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.calculate,Token.paramater,Token.paramater,Token.paramater},delegate(sbyte[] n, string[] t) {
                 return Calculate.OperatorSupplied(t[-n[1]],t[-n[2]],t[-n[3]]);
             })
             /*
@@ -62,14 +64,8 @@ namespace Sasha_Hub {
             Tokens are the strings that make up commands
             To make a command with sasha if will process the string into tokens
             and then it will match it with one of the token arrays inside of a IntCmd
-            Take a look at this: {Token.calculate,0,0}
-            calculate is a token it has to match. If you're adding a new command you're probably going to
-            want to make a token for it. The two zeroes are both parameters.
             To use the paramaters (which are always strings) in your delegates logic use t[-n[<your number here>]]
             It's a little complicated but I won't go into detail. You can figure it out.
-            If you want the second token of the token array which is a paramter, you would use 1 as your number
-            The first token is always 0, which I guess could be a paramater if you wanted it to be
-            But typically parameters aren't first.
             Inside the delegate have whatever you want. Just as long as it returns a string or null;
             Returning null implies something like a web page opening or a new window popping up
             Return "ERROR" (without the quotes) will make Sasha say the default error message (somethingNotGood)
@@ -81,28 +77,41 @@ namespace Sasha_Hub {
             */
         };
         internal static string Interpret(string command) {
-            string[] tokens = command.Trim().Split(' ');
-            sbyte[] numericalTokens = new sbyte[tokens.Length];
-            Token[] finalTokens = new Token[tokens.Length];
-            for(byte i = 0;i<tokens.Length;i+=1) {
-                try {
-                    numericalTokens[i] = (sbyte)(Token)Enum.Parse(typeof(Token), tokens[i],true);
-                    finalTokens[i] = (Token)numericalTokens[i];
-                } catch {
-                    numericalTokens[i] = (sbyte)-i;
-                    finalTokens[i] = 0;
+            if(command != null) {
+                command = command.ToLowerInvariant().Trim();
+                foreach(string replaceWord in ignoreWords) {
+                    command.Replace(replaceWord,"");
                 }
-            }
-            foreach(IntCmd variableNameIWantedWasAlreadyTakenByThisMethodsOverload in Commands) {
-                if(variableNameIWantedWasAlreadyTakenByThisMethodsOverload.Tokens == finalTokens) {
-                    string returnValue = variableNameIWantedWasAlreadyTakenByThisMethodsOverload.Callback(numericalTokens,tokens);
-                    switch(returnValue) {
-                        case "ERROR":
-                            return somethingNotGood;
-                        case null:
-                            return null;
-                        default:
-                            return returnValue;
+                if(command != "") {
+                    string[] tokens = command.Split(' ');
+                    sbyte[] numericalTokens = new sbyte[tokens.Length];
+                    Token[] finalTokens = new Token[tokens.Length];
+                    for(byte i = 0;i<tokens.Length;i+=1) {
+                        try {
+                            if(!tokens[i].All(char.IsDigit)) {
+                                numericalTokens[i] = (sbyte)(Token)Enum.Parse(typeof(Token), tokens[i],true);
+                                finalTokens[i] = (Token)numericalTokens[i];
+                            } else {
+                                numericalTokens[i] = (sbyte)-i;
+                                finalTokens[i] = 0;
+                            }
+                        } catch {
+                            numericalTokens[i] = (sbyte)-i;
+                            finalTokens[i] = 0;
+                        }
+                    }
+                    foreach(IntCmd intcmd in Commands) {
+                        if(Enumerable.SequenceEqual(intcmd.Tokens,finalTokens)) {
+                            string returnValue = intcmd.Callback(numericalTokens,tokens);
+                            switch(returnValue) {
+                                case "ERROR":
+                                    return somethingNotGood;
+                                case null:
+                                    return null;
+                                default:
+                                    return returnValue;
+                            }
+                        }
                     }
                 }
             }
