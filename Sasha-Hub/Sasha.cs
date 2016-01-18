@@ -3,15 +3,15 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using Sasha_Hub.Commands;
-    internal sealed class IntCmd {
-        internal IntCmd(Sasha.Token[] tokens,Sasha.Callback callback) {
-            Callback = callback;
-            Tokens = tokens;
-        }
-        internal Sasha.Token[] Tokens;
-        internal Sasha.Callback Callback;
-    }
     internal static class Sasha {
+        private sealed class IntCmd {
+            internal IntCmd(Token[] tokens,Sasha.Callback callback) {
+                Callback = callback;
+                Tokens = tokens;
+            }
+            internal Token[] Tokens;
+            internal Callback Callback;
+        }
         private const string knowHowDo = "I can't do that. Fuck you buddy.";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         private const string errorString = "error";
