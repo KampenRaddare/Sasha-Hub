@@ -5,7 +5,7 @@
     using Sasha_Hub.Commands;
     internal static class Sasha {
         private sealed class IntCmd {
-            internal IntCmd(Token[] tokens,Sasha.Callback callback) {
+            internal IntCmd(Token[] tokens,Callback callback) {
                 Callback = callback;
                 Tokens = tokens;
             }
