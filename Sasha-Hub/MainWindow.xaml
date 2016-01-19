@@ -18,15 +18,15 @@
             <RowDefinition Height="94*"/>
         </Grid.RowDefinitions>
         <Button x:Name="Settings" Content="Settings" Grid.Column="1" Margin="10,5,10,0" VerticalAlignment="Top" UseLayoutRounding="False" VerticalContentAlignment="Center" Height="30" ToolTip="Opens the settings window."/>
-        <Button x:Name="Save" Content="Save Chat" Grid.Column="1" Margin="10,40,10,0" VerticalAlignment="Top" Height="30"/>
-        <Button x:Name="Github" Content="Github" Grid.Column="1" Margin="10,75,10,0" VerticalAlignment="Top" Height="30" FontWeight="SemiBold"/>
-        <Button x:Name="Help" Content="Help" Grid.Column="1" Margin="10,110,10,0" VerticalAlignment="Top" Height="30"/>
-        <Button x:Name="About" Content="About" Grid.Column="1" Margin="10,145,10,0" Height="30" VerticalAlignment="Top"/>
-        <ScrollViewer Margin="10,5,10,10"/>
+        <Button x:Name="Save" Content="Save Chat" Grid.Column="1" Margin="10,40,10,0" VerticalAlignment="Top" Height="30" ToolTip="Saves your current chat and outputs it to a text file."/>
+        <Button x:Name="Github" Content="Github" Grid.Column="1" Margin="10,75,10,0" VerticalAlignment="Top" Height="30" FontWeight="SemiBold" ToolTip="Directs you to our Github page. If you don't know what Github even is, then you probably don't need to worry about this."/>
+        <Button x:Name="Help" Content="Help" Grid.Column="1" Margin="10,110,10,0" VerticalAlignment="Top" Height="30" ToolTip="Shows you all the commands that are currently implemented."/>
+        <Button x:Name="About" Content="About" Grid.Column="1" Margin="10,145,10,0" Height="30" VerticalAlignment="Top" ToolTip="Shows the about window. This tells you a little about the two developers."/>
         <TextBox x:Name="SayBox" Margin="10,10,112,0" Grid.Row="1" TextWrapping="Wrap" Height="30" VerticalAlignment="Top" SpellCheck.IsEnabled="True" UndoLimit="600" FontSize="14.667"/>
         <Button x:Name="Say" Content="Say" Margin="0,9,10,0" Grid.Row="1" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Width="97" IsDefault="True"/>
         <WindowsFormsHost Margin="10" Grid.Row="1" Grid.Column="1">
             <winForms:PictureBox x:Name="Tag" BackgroundImageLayout="None" SizeMode="Zoom"></winForms:PictureBox>
         </WindowsFormsHost>
+        <TextBox x:Name="textBox" TextWrapping="WrapWithOverflow" Margin="10" Background="#FFEAEAEA" BorderBrush="Black" SpellCheck.IsEnabled="True" Text="Sasha: Hello!&#xD;&#xA;You: Define &quot;wtf&quot;&#xD;&#xA;Sasha: What The Fuck - This is what you say when you are in awe!&#xD;&#xA;You: What is the weather like?&#xD;&#xA;Sasha: It is very sunny!" UndoLimit="0" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsUndoEnabled="False" FontSize="21.333" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="Global Monospace"/>
     </Grid>
 </Window>

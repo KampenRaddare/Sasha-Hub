@@ -4,7 +4,7 @@
     {
         internal static string Weather()
         {
-            //ip location->web service->weather service->xml->process | Me can do it later I guess
+            // IP location->web service->weather service->xml->process | Me can do it later I guess
             return "27. This is the weather right now. Impressed?";
         }
 
