@@ -1,0 +1,36 @@
+﻿<Window x:Class="Sasha_Hub.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sasha_Hub"
+        mc:Ignorable="d"
+        Title="Settings" Height="432" Width="409" Topmost="True" WindowStartupLocation="CenterOwner" MaxWidth="600" MaxHeight="600">
+    <Grid>
+        <Rectangle Fill="#FFBABAC9"/>
+        <TabControl x:Name="tabControl" IsSynchronizedWithCurrentItem="True" TabStripPlacement="Left">
+            <TabItem Header="General" Content="Oh no! Nothing is here!"/>
+            <TabItem Header="Theme">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="342*"/>
+                        <RowDefinition Height="53*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="63*"/>
+                        <ColumnDefinition Width="22*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ApplyTheme" Content="Apply" Margin="3,11,10,10" Height="Auto" Grid.Column="1" Grid.Row="1"/>
+                    <Menu x:Name="ThemeMenu" FontFamily="Segoe UI" BorderBrush="Black" Margin="0,0,10,0" Grid.RowSpan="2" FontSize="13.333">
+                        <MenuItem FontFamily="Segoe UI" Header="Default Purple" HeaderStringFormat="" IsChecked="True" IsCheckable="True" Width="242"/>
+                        <MenuItem Header="Lime Green" IsCheckable="True" Width="242"/>
+                        <MenuItem Header="Seattle Blue" IsCheckable="True" Width="242"/>
+                        <MenuItem Header="Sasha Pink" IsCheckable="True" Width="242"/>
+                        <MenuItem Header="Cherry Red" IsCheckable="True" Width="242"/>
+                    </Menu>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
