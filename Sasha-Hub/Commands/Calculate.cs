@@ -4,17 +4,39 @@
     {
         internal static string AllOperations(string number1, string number2)
         {
-            // Since no operator for this method is supplied just return results for all of them
-            // like 2 + 2 = 4 ; 2 / 2 = 1; 2 - 2 = 0; 2 * 2 = 4;
-            return "Not set up yet!";
+            // Since no operator is supplied
+            // returns every possible solution
+
+            int num1 = System.Convert.ToInt32(number1);
+            int num2 = System.Convert.ToInt32(number2);
+
+            return "Multiplied = " + (num1 * num2).ToString() + "\n" + 
+                "Divided = " + (num1 / num2) + "\n" +
+                "Added = " + (num1 + num2) + "\n" + 
+                "Subtracted = " + (num1 - num2);
         }
 
         internal static string OperatorSupplied(string number1, string number2, string numberOperator)
         {
-            // Determine if operator is valid using switch statement
-            // fuck it just make this entire method a switch statement
-            // if the operator isn't a valid one just return an angry message
-            return "Not set up yet!";
+            // Since operator is supplied
+            // returns specific solution
+
+            int num1 = System.Convert.ToInt32(number1);
+            int num2 = System.Convert.ToInt32(number2);
+
+            switch (numberOperator)
+            {
+                case "+":
+                    return (num1 + num2).ToString();
+                case "/":
+                    return (num1 / num2).ToString();
+                case "-":
+                    return (num1 - num2).ToString();
+                case "*":
+                    return (num1 * num2).ToString();
+                default:
+                    return "Fuck you. You broke me. D;";
+            }
         }
     }
 }
