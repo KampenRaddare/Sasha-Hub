@@ -30,12 +30,12 @@ namespace Sasha_Hub
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This will work eventually!");
+            MessageBox.Show("You can save your file, IN HELL!");
         }
 
         private void Github_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This will work eventually!");
+            System.Diagnostics.Process.Start("https://github.com/KampenRaddare/Sasha-Hub");
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
