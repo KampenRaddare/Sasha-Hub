@@ -7,7 +7,7 @@
         xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" MinWidth="525" MinHeight="350">
+        Title="Sasha Hub" Height="350" Width="525" MinWidth="525" MinHeight="350" Icon="pack://siteoforigin:,,,/Resources/Sasha.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400*"/>
@@ -17,19 +17,16 @@
             <RowDefinition Height="225*"/>
             <RowDefinition Height="94*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="button" Content="Button" Grid.Column="1" Margin="10,10,10,0" VerticalAlignment="Top" UseLayoutRounding="False" VerticalContentAlignment="Center" Height="25"/>
-        <Button x:Name="button_Copy" Content="Button" Grid.Column="1" Margin="10,41,10,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="button_Copy1" Content="Button" Grid.Column="1" Margin="10,71,10,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="button_Copy2" Content="Button" Grid.Column="1" Margin="10,131,10,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="button_Copy3" Content="Button" Grid.Column="1" Margin="10,161,10,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="button_Copy4" Content="Button" Grid.Column="1" Margin="10,101,10,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="button_Copy5" Content="Button" Grid.Column="1" Margin="10,191,10,0" Height="25" VerticalAlignment="Top"/>
+        <Button x:Name="Settings" Content="Settings" Grid.Column="1" Margin="10,5,10,0" VerticalAlignment="Top" UseLayoutRounding="False" VerticalContentAlignment="Center" Height="30" ToolTip="Opens the settings window."/>
+        <Button x:Name="Save" Content="Save Chat" Grid.Column="1" Margin="10,40,10,0" VerticalAlignment="Top" Height="30"/>
+        <Button x:Name="Github" Content="Github" Grid.Column="1" Margin="10,75,10,0" VerticalAlignment="Top" Height="30" FontWeight="SemiBold"/>
+        <Button x:Name="Help" Content="Help" Grid.Column="1" Margin="10,110,10,0" VerticalAlignment="Top" Height="30"/>
+        <Button x:Name="About" Content="About" Grid.Column="1" Margin="10,145,10,0" Height="30" VerticalAlignment="Top"/>
         <ScrollViewer Margin="10,5,10,10"/>
-        <TextBox x:Name="textBox" Margin="10,10,112,0" Grid.Row="1" TextWrapping="Wrap" Height="30" VerticalAlignment="Top" Text="Sasha" SpellCheck.IsEnabled="True" UndoLimit="600" FontSize="14.667"/>
-        <Button x:Name="button_Copy6" Content="Button" Margin="0,9,10,0" Grid.Row="1" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Width="97" IsDefault="True"/>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="74" Margin="10,10,0,0" VerticalAlignment="Top" Width="97" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
-            <winForms:PictureBox x:Name="Loading" BackgroundImageLayout="None" SizeMode="Zoom"></winForms:PictureBox>
+        <TextBox x:Name="SayBox" Margin="10,10,112,0" Grid.Row="1" TextWrapping="Wrap" Height="30" VerticalAlignment="Top" SpellCheck.IsEnabled="True" UndoLimit="600" FontSize="14.667"/>
+        <Button x:Name="Say" Content="Say" Margin="0,9,10,0" Grid.Row="1" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Width="97" IsDefault="True"/>
+        <WindowsFormsHost Margin="10" Grid.Row="1" Grid.Column="1">
+            <winForms:PictureBox x:Name="Tag" BackgroundImageLayout="None" SizeMode="Zoom"></winForms:PictureBox>
         </WindowsFormsHost>
-        <Image x:Name="image" Grid.Column="1" Margin="10" Grid.Row="1" ToolTip="" Source="Resources/Sasha.png"/>
     </Grid>
 </Window>

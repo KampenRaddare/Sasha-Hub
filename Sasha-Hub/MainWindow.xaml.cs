@@ -7,16 +7,18 @@ namespace Sasha_Hub
         public MainWindow()
         {
             InitializeComponent();
-            Loading.Image = Sasha_Hub.Resources.SashaLoading;
+            Tag.Image = Sasha_Hub.Resources.Sasha;
         }
-        public void ToggleLoading()
+
+        public void ToggleLoading(bool isOn)
         {
-            if(Loading.Visible) {
-                Loading.Visible = false;
-                image.Visibility = Visibility.Visible;
-            } else {
-                Loading.Visible = true;
-                image.Visibility = Visibility.Hidden;
+            if (isOn == true)
+            {
+                Tag.Image = Sasha_Hub.Resources.SashaLoading;
+            }
+            else
+            {
+                Tag.Image = Sasha_Hub.Resources.Sasha;
             }
         }
     }
