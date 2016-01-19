@@ -7,7 +7,7 @@
         xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
-        Title="Sasha Hub" Height="350" Width="525" MinWidth="525" MinHeight="350" Icon="pack://siteoforigin:,,,/Resources/SashaPurpleIcon.png">
+        Title="Sasha Hub" Height="350" Width="525" MinWidth="525" MinHeight="350" Icon="pack://siteoforigin:,,,/Resources/SashaPurpleIcon.png" IsTabStop="False" TabIndex="0" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400*"/>
@@ -17,16 +17,14 @@
             <RowDefinition Height="225*"/>
             <RowDefinition Height="94*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Settings" Content="Settings" Grid.Column="1" Margin="10,5,10,0" VerticalAlignment="Top" UseLayoutRounding="False" VerticalContentAlignment="Center" Height="30" ToolTip="Opens the settings window." Click="Settings_Click"/>
-        <Button x:Name="Save" Content="Save Chat" Grid.Column="1" Margin="10,40,10,0" VerticalAlignment="Top" Height="30" ToolTip="Saves your current chat and outputs it to a text file." Click="Save_Click"/>
-        <Button x:Name="Github" Content="Github" Grid.Column="1" Margin="10,75,10,0" VerticalAlignment="Top" Height="30" FontWeight="SemiBold" ToolTip="Directs you to our Github page. If you don't know what Github even is, then you probably don't need to worry about this." Click="Github_Click"/>
-        <Button x:Name="Help" Content="Help" Grid.Column="1" Margin="10,110,10,0" VerticalAlignment="Top" Height="30" ToolTip="Shows you all the commands that are currently implemented." Click="Help_Click"/>
-        <Button x:Name="About" Content="About" Grid.Column="1" Margin="10,145,10,0" Height="30" VerticalAlignment="Top" ToolTip="Shows the about window. This tells you a little about the two developers." Click="About_Click"/>
-        <TextBox x:Name="SayBox" Margin="10,10,112,0" Grid.Row="1" TextWrapping="Wrap" Height="30" VerticalAlignment="Top" SpellCheck.IsEnabled="True" UndoLimit="600" FontSize="14.667"/>
-        <Button x:Name="Say" Content="Say" Margin="0,9,10,0" Grid.Row="1" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Width="97" IsDefault="True" Click="Say_Click"/>
-        <WindowsFormsHost Margin="10" Grid.Row="1" Grid.Column="1">
-            <winForms:PictureBox x:Name="Tag" BackgroundImageLayout="None" SizeMode="Zoom"></winForms:PictureBox>
-        </WindowsFormsHost>
-        <TextBox x:Name="ConversationViewer" TextWrapping="WrapWithOverflow" Margin="10" Background="#FFEAEAEA" BorderBrush="Black" SpellCheck.IsEnabled="True" UndoLimit="0" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsUndoEnabled="False" FontSize="18.667" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="Global Monospace" Text="Sasha: Hello!"/>
+        <Button x:Name="Settings" Content="Settings" Grid.Column="1" Margin="10,5,10,0" VerticalAlignment="Top" UseLayoutRounding="False" VerticalContentAlignment="Center" Height="30" ToolTip="Opens the settings window." Click="Settings_Click" IsTabStop="False" TabIndex="0"/>
+        <Button x:Name="Save" Content="Save Chat" Grid.Column="1" Margin="10,40,10,0" VerticalAlignment="Top" Height="30" ToolTip="Saves your current chat and outputs it to a text file." Click="Save_Click" IsTabStop="False" TabIndex="0"/>
+        <Button x:Name="Github" Content="Github" Grid.Column="1" Margin="10,75,10,0" VerticalAlignment="Top" Height="30" FontWeight="SemiBold" ToolTip="Directs you to our Github page. If you don't know what Github even is, then you probably don't need to worry about this." Click="Github_Click" IsTabStop="False" TabIndex="0"/>
+        <Button x:Name="Help" Content="Help" Grid.Column="1" Margin="10,110,10,0" VerticalAlignment="Top" Height="30" ToolTip="Shows you all the commands that are currently implemented." Click="Help_Click" IsTabStop="False" TabIndex="0"/>
+        <Button x:Name="About" Content="About" Grid.Column="1" Margin="10,145,10,0" Height="30" VerticalAlignment="Top" ToolTip="Shows the about window. This tells you a little about the two developers." Click="About_Click" IsTabStop="False" TabIndex="0"/>
+        <TextBox x:Name="SayBox" Margin="10,10,112,0" Grid.Row="1" TextWrapping="Wrap" Height="30" VerticalAlignment="Top" SpellCheck.IsEnabled="True" UndoLimit="600" FontSize="14.667" AllowDrop="False" IsTabStop="False" TabIndex="0"/>
+        <Button x:Name="Say" Content="Say" Margin="0,9,10,0" Grid.Row="1" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Width="97" IsDefault="True" Click="Say_Click" IsTabStop="False" TabIndex="0"/>
+        <Image x:Name="Tag" Margin="10" Grid.Row="1" Grid.Column="1" Source="Resources/Sasha.png"></Image>
+        <TextBox x:Name="ConversationViewer" TextWrapping="WrapWithOverflow" Margin="10" Background="#FFEAEAEA" BorderBrush="Black" SpellCheck.IsEnabled="True" UndoLimit="0" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsUndoEnabled="False" FontSize="18.667" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="Global Monospace" Text="Sasha: Hello!" Focusable="False" AllowDrop="False" IsTabStop="False" TabIndex="0"/>
     </Grid>
 </Window>

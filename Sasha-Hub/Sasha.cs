@@ -17,16 +17,19 @@
             internal Token[] Tokens;
             internal Callback Callback;
         }
-
-        private const string knowHowDo = "I can't do that. Fuck you buddy.";
+        private const string saidNothing = "Scared to say something meaningfull?";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
-        private const string errorString = "Error";
+        private const string nullError = "String passed to Sasha.Command() can't be null!";
+        private const string errorString = "error"; //This is internal. It's not a message.
         private delegate string Callback(sbyte[] n, string[] t);
         private enum Token
         {
             paramater = 0, help, define, find, get, make, calculate, stocks, joke, weather
         };
-        private static readonly string[] ignoreStrings = new string[] { "and", "fucking", "do", "ayy", "lmao" };
+        private enum Mood
+        {
+            //Add moods
+        }
         private static readonly IntCmd[] Commands = new IntCmd[]
         {
             new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t)
@@ -71,16 +74,15 @@
                 return Calculate.OperatorSupplied(t[-n[1]],t[-n[2]],t[-n[3]]);
             })
         };
-
-        internal static string Interpret(string command)
+        private static string Chat(string message) {
+            //do whatever with plain text and use Mood enum
+            return "me no smart yet";
+        }
+        internal static string Command(string command)
         {
             if (command != null)
             {
                 command = command.Trim();
-                foreach (string replaceWord in ignoreStrings)
-                {
-                    command.Replace(replaceWord, "");
-                }
                 if (command != "")
                 {
                     string[] tokens = command.Split(' ');
@@ -123,9 +125,13 @@
                             }
                         }
                     }
+                } else {
+                    return saidNothing;
                 }
+            } else {
+                throw new Exception(nullError);
             }
-            return knowHowDo;
+            return Chat(command);
         }
     }
 }

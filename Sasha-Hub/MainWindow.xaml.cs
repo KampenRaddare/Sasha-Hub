@@ -1,27 +1,40 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Threading;
+using System.Windows.Media.Imaging;
+using WpfAnimatedGif;
 
 namespace Sasha_Hub
 {
     public partial class MainWindow : Window
     {
+        private static BitmapImage sashaImage = new BitmapImage();
+        private static BitmapImage sashaLoadingImage = new BitmapImage();
         public MainWindow()
         {
             InitializeComponent();
-
             #region SETUP
-            Tag.Image = Sasha_Hub.Resources.Sasha;
+            if(sashaImage != null) {
+                sashaLoadingImage.BeginInit();
+                sashaLoadingImage.UriSource = new Uri(@"pack://siteoforigin:,,,/Resources/SashaLoading.gif");
+                sashaLoadingImage.EndInit();
+                sashaImage.BeginInit();
+                sashaImage.UriSource = new Uri(@"pack://siteoforigin:,,,/Resources/Sasha.png");
+                sashaImage.EndInit();
+            }
+            Tag.Source = sashaImage;
             #endregion
         }
 
-        public void ToggleLoading(bool isOn)
+        public void ToggleLoading() //The point of it being toggle is there is no overload
         {
-            if (isOn == true)
+            if (Tag.Source == sashaImage)
             {
-                Tag.Image = Sasha_Hub.Resources.SashaLoading;
+                ImageBehavior.SetAnimatedSource(Tag, sashaLoadingImage);
             }
             else
             {
-                Tag.Image = Sasha_Hub.Resources.Sasha;
+                ImageBehavior.SetAnimatedSource(Tag,sashaImage);
             }
         }
 
@@ -62,9 +75,21 @@ namespace Sasha_Hub
             // Conversation Logic
             if (SayBox.Text != "")
             {
-                ConversationViewer.Text += "\n" + "You: " + SayBox.Text;
-                ConversationViewer.Text += "\n" + "Sasha: " + Sasha.Interpret(SayBox.Text);
-                SayBox.Text = "";
+                ConversationViewer.Text += $"{Environment.NewLine}You: {SayBox.Text}";
+                string sashaMessage = Sasha.Command(SayBox.Text);
+                 SayBox.Text = "";
+                if(sashaMessage != null) { //If its null its a command that doesn't return a message, like opening a webpage, or help
+                    ToggleLoading();
+                    Thread thread = new Thread(delegate()
+                    {
+                        Thread.Sleep(sashaMessage.Length * 50);
+                        this.Dispatcher.Invoke((Action)(() =>{
+                            ConversationViewer.Text += $"{Environment.NewLine}Sasha: {sashaMessage}";
+                            ToggleLoading();
+                        }));
+                    });
+                    thread.Start();
+                }
             }
             else
             {

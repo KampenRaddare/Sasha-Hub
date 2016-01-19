@@ -91,6 +91,10 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.14\lib\net\WpfAnimatedGif.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -153,10 +157,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SashaLoading.gif" />
+    <Resource Include="Resources\SashaLoading.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Sasha.png" />
+    <Resource Include="Resources\Sasha.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutWindow.resx">
@@ -178,7 +182,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SashaPurpleIcon.png" />
+    <Resource Include="Resources\SashaPurpleIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

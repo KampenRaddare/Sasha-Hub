@@ -14,6 +14,6 @@
         <Button x:Name="Find" Content="Find" HorizontalAlignment="Left" Margin="15,134,0,0" VerticalAlignment="Top" Width="165"/>
         <Button x:Name="Get" Content="Get" HorizontalAlignment="Left" Margin="185,60,0,0" VerticalAlignment="Top" Width="160"/>
         <Button x:Name="Help" Content="Help" HorizontalAlignment="Left" Margin="185,97,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button x:Name="Make" Content="Make" HorizontalAlignment="Left" Margin="185,134,0,0" VerticalAlignment="Top" Width="160"/>
+        <Button x:Name="Make" Content="Make" HorizontalAlignment="Left" Margin="185,134,0,0" VerticalAlignment="Top" Width="160" Focusable="False" IsTabStop="False" TabIndex="0"/>
     </Grid>
 </Window>
