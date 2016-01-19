@@ -7,7 +7,10 @@ namespace Sasha_Hub
         public MainWindow()
         {
             InitializeComponent();
+
+            #region SETUP
             Tag.Image = Sasha_Hub.Resources.Sasha;
+            #endregion
         }
 
         public void ToggleLoading(bool isOn)
@@ -24,6 +27,7 @@ namespace Sasha_Hub
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
+            // Opens the settings window
             SettingsWindow Settings = new SettingsWindow();
             Settings.Show();
         }
@@ -35,24 +39,37 @@ namespace Sasha_Hub
 
         private void Github_Click(object sender, RoutedEventArgs e)
         {
+            // Takes user to Github Project
             System.Diagnostics.Process.Start("https://github.com/KampenRaddare/Sasha-Hub");
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
+            // Opens the help window
             HelpWindow Help = new HelpWindow();
             Help.Show();
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
+            // Opens the about window
             AboutWindow About = new AboutWindow();
             About.Show();
         }
 
         private void Say_Click(object sender, RoutedEventArgs e)
         {
-
+            // Conversation Logic
+            if (SayBox.Text != "")
+            {
+                ConversationViewer.Text += "\n" + "You: " + SayBox.Text;
+                ConversationViewer.Text += "\n" + "Sasha: " + Sasha.Interpret(SayBox.Text);
+                SayBox.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("You must say something!");
+            }
         }
     }
 }

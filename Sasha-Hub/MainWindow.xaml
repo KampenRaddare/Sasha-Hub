@@ -27,6 +27,6 @@
         <WindowsFormsHost Margin="10" Grid.Row="1" Grid.Column="1">
             <winForms:PictureBox x:Name="Tag" BackgroundImageLayout="None" SizeMode="Zoom"></winForms:PictureBox>
         </WindowsFormsHost>
-        <TextBox x:Name="textBox" TextWrapping="WrapWithOverflow" Margin="10" Background="#FFEAEAEA" BorderBrush="Black" SpellCheck.IsEnabled="True" Text="Sasha: Hello!&#xD;&#xA;You: Define &quot;wtf&quot;&#xD;&#xA;Sasha: What The Fuck - This is what you say when you are in awe!&#xD;&#xA;You: What is the weather like?&#xD;&#xA;Sasha: It is very sunny!" UndoLimit="0" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsUndoEnabled="False" FontSize="21.333" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="Global Monospace"/>
+        <TextBox x:Name="ConversationViewer" TextWrapping="WrapWithOverflow" Margin="10" Background="#FFEAEAEA" BorderBrush="Black" SpellCheck.IsEnabled="True" UndoLimit="0" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsUndoEnabled="False" FontSize="18.667" FontWeight="Bold" TextDecorations="{x:Null}" FontFamily="Global Monospace" Text="Sasha: Hello!"/>
     </Grid>
 </Window>

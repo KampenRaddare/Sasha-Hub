@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using Sasha_Hub.Commands;
+
     internal static class Sasha
     {
         private sealed class IntCmd
@@ -19,7 +20,7 @@
 
         private const string knowHowDo = "I can't do that. Fuck you buddy.";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
-        private const string errorString = "error";
+        private const string errorString = "Error";
         private delegate string Callback(sbyte[] n, string[] t);
         private enum Token
         {
