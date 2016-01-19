@@ -23,5 +23,10 @@ namespace Sasha_Hub
         {
             InitializeComponent();
         }
+
+        private void ApplyTheme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

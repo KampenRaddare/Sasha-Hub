@@ -20,13 +20,13 @@
                         <ColumnDefinition Width="63*"/>
                         <ColumnDefinition Width="22*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="ApplyTheme" Content="Apply" Margin="3,11,10,10" Height="Auto" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="ApplyTheme" Content="Apply" Margin="3,11,10,10" Height="Auto" Grid.Column="1" Grid.Row="1" Click="ApplyTheme_Click"/>
                     <Menu x:Name="ThemeMenu" FontFamily="Segoe UI" BorderBrush="Black" Margin="0,0,10,0" Grid.RowSpan="2" FontSize="13.333">
-                        <MenuItem FontFamily="Segoe UI" Header="Default Purple" HeaderStringFormat="" IsChecked="True" IsCheckable="True" Width="242"/>
-                        <MenuItem Header="Lime Green" IsCheckable="True" Width="242"/>
-                        <MenuItem Header="Seattle Blue" IsCheckable="True" Width="242"/>
-                        <MenuItem Header="Sasha Pink" IsCheckable="True" Width="242"/>
-                        <MenuItem Header="Cherry Red" IsCheckable="True" Width="242"/>
+                        <MenuItem x:Name="Purple" FontFamily="Segoe UI" Header="Default Purple" HeaderStringFormat="" IsChecked="True" IsCheckable="True" Width="242"/>
+                        <MenuItem x:Name="Green" Header="Lime Green" IsCheckable="True" Width="242"/>
+                        <MenuItem x:Name="Blue" Header="Seattle Blue" IsCheckable="True" Width="242"/>
+                        <MenuItem x:Name="Pink" Header="Sasha Pink" IsCheckable="True" Width="242"/>
+                        <MenuItem x:Name="Red" Header="Cherry Red" IsCheckable="True" Width="242"/>
                     </Menu>
                 </Grid>
             </TabItem>

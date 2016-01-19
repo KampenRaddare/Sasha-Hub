@@ -14,7 +14,8 @@ namespace Sasha_Hub
         {
             InitializeComponent();
             #region SETUP
-            if(sashaImage != null) {
+            if (sashaImage != null)
+            {
                 sashaLoadingImage.BeginInit();
                 sashaLoadingImage.UriSource = new Uri(@"pack://siteoforigin:,,,/Resources/SashaLoading.gif");
                 sashaLoadingImage.EndInit();
@@ -26,7 +27,7 @@ namespace Sasha_Hub
             #endregion
         }
 
-        public void ToggleLoading() //The point of it being toggle is there is no overload
+        public void ToggleLoading()
         {
             if (Tag.Source == sashaImage)
             {
@@ -34,7 +35,7 @@ namespace Sasha_Hub
             }
             else
             {
-                ImageBehavior.SetAnimatedSource(Tag,sashaImage);
+                ImageBehavior.SetAnimatedSource(Tag, sashaImage);
             }
         }
 
@@ -77,13 +78,14 @@ namespace Sasha_Hub
             {
                 ConversationViewer.Text += $"{Environment.NewLine}You: {SayBox.Text}";
                 string sashaMessage = Sasha.Command(SayBox.Text);
-                 SayBox.Text = "";
-                if(sashaMessage != null) { //If its null its a command that doesn't return a message, like opening a webpage, or help
+                SayBox.Text = "";
+                if (sashaMessage != null)
+                { // If its null its a command that doesn't return a message, like opening a webpage, or help
                     ToggleLoading();
-                    Thread thread = new Thread(delegate()
+                    Thread thread = new Thread(delegate ()
                     {
                         Thread.Sleep(sashaMessage.Length * 50);
-                        this.Dispatcher.Invoke((Action)(() =>{
+                        this.Dispatcher.Invoke((Action)(() => {
                             ConversationViewer.Text += $"{Environment.NewLine}Sasha: {sashaMessage}";
                             ToggleLoading();
                         }));

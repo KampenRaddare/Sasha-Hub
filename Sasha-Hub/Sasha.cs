@@ -20,7 +20,7 @@
         private const string saidNothing = "Scared to say something meaningfull?";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         private const string nullError = "String passed to Sasha.Command() can't be null!";
-        private const string errorString = "error"; //This is internal. It's not a message.
+        private const string errorString = "error";
         private delegate string Callback(sbyte[] n, string[] t);
         private enum Token
         {
@@ -74,8 +74,9 @@
                 return Calculate.OperatorSupplied(t[-n[1]],t[-n[2]],t[-n[3]]);
             })
         };
-        private static string Chat(string message) {
-            //do whatever with plain text and use Mood enum
+        private static string Chat(string message)
+        {
+            // Do whatever with plain text and use Mood enum
             return "me no smart yet";
         }
         internal static string Command(string command)
@@ -125,10 +126,14 @@
                             }
                         }
                     }
-                } else {
+                }
+                else
+                {
                     return saidNothing;
                 }
-            } else {
+            }
+            else
+            {
                 throw new Exception(nullError);
             }
             return Chat(command);
