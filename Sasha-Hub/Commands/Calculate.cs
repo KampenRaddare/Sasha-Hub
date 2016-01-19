@@ -16,7 +16,7 @@
                 "Subtracted = " + (num1 - num2);
         }
 
-        internal static string OperatorSupplied(string number1, string number2, string numberOperator)
+        internal static string OperatorSupplied(string number1, string numberOperator, string number2)
         {
             // Since operator is supplied
             // returns specific solution
@@ -26,13 +26,13 @@
 
             switch (numberOperator)
             {
-                case "+":
+                case "plus":
                     return (num1 + num2).ToString();
-                case "/":
+                case "divided by":
                     return (num1 / num2).ToString();
-                case "-":
+                case "subtract":
                     return (num1 - num2).ToString();
-                case "*":
+                case "times":
                     return (num1 * num2).ToString();
                 default:
                     return "Fuck you. You broke me. D;";
