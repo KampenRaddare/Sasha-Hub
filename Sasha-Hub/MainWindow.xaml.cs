@@ -84,7 +84,7 @@ namespace Sasha_Hub
                     ToggleLoading();
                     Thread thread = new Thread(delegate ()
                     {
-                        Thread.Sleep(sashaMessage.Length * 50);
+                        Thread.Sleep(sashaMessage.Length * 25); // Jokes were taking WAY to long so I changed this. Sorry.
                         this.Dispatcher.Invoke((Action)(() => {
                             ConversationViewer.Text += $"{Environment.NewLine}Sasha: {sashaMessage}";
                             ToggleLoading();

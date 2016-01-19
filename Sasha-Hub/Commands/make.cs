@@ -16,7 +16,8 @@
             };
             int index = 0;
 
-            r.Next(index);
+            index = r.Next(index, jokes.Length);    // Yeah I fucked this up before. I suck :D
+            System.Diagnostics.Debug.WriteLine(index);
 
             return jokes[index];
         }
