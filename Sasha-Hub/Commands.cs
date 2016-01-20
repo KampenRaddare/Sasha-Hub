@@ -88,7 +88,7 @@
         }
         public string Joke()
         {
-            Random r = new Random(); // Don't want to put a using statement for just this :/
+            Random r = new Random();
             string[] jokes =
             {
                 "A husband and wife are trying to set up a new password for their computer. The husband puts, 'Mypenis,' and the wife falls on the ground laughing because on the screen it says, 'Error. Not long enough.'",
@@ -100,14 +100,28 @@
             };
             int index = 0;
 
-            index = r.Next(index, jokes.Length);    // Yeah I fucked this up before. I suck :D
-            Debug.WriteLine(index);
+            index = r.Next(index, jokes.Length);
 
             return jokes[index];
         }
         public string OffensiveJoke()
         {
-            return "Was an inside job?";
+            Random r = new Random();
+            string[] offensiveJokes =
+            {
+                "911 was an inside job.",
+                "Donald Trump was an inside job.",
+                "What's red, covered in boils and scratching at the window? A baby in the microwave.",
+                "How do you fit 3 dead babies in a bucket? Use a blender. How do you get them out of the bucket? Tortilla chips.",
+                "What's the difference between an onion and a baby? I don't cry when I chop up babies.",
+                "What's harder than nailing a dead baby to a tree? My dick-while I'm doing it.",
+                "Are there many successful places to pick up kids? Well, it's swings and roundabouts really."
+            };
+            int index = 0;
+
+            index = r.Next(index, offensiveJokes.Length);
+
+            return offensiveJokes[index];
         }
     }
 }

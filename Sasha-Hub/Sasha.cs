@@ -10,10 +10,10 @@
     internal static class Sasha
     {
         private const string SaidNothing = "Scared to say something meaningfull?";
-        private const string NullError = "String passed to Sasha.Command() can\'t be null!";
+        private const string NullError = "String passed to Sasha.Command() can't be null!";
         internal const string InternalErrorString = "error";
         private const string ErrorMessage = "Something went wrong. Brace yourself.";
-        private const string IForGotHow = "I think something just broke inside of me. I'm sure I\'ll be fine! *dies*";
+        private const string IForGotHow = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
         private enum Mood
         {
             Happy,
@@ -29,7 +29,7 @@
             Excited
         };
         private static Mood CurrentMood = Mood.Excited;
-        private static readonly commandData CommandData = (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml")); //Best line of code 2016
+        private static readonly commandData CommandData = (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml")); // Fuck your formating of comments bitch
         internal static string Interpret(string message)
         {
             if (message != null)
@@ -56,12 +56,7 @@
         }
         private static string ProcessChat(string message)
         {
-            /* SPAAAAAAAAAAAAAAAACEEEEEEEEEE MAGGGGGGGGGICCCCCCCCCCCCCC
-            If you want me to do the steps I sent you in the really long text message let me know but I'll leave it up to you.
-            I want to set this entire part of the system up in xml (if you can wait a day)
-            That way there's no internal enums or switch statements. I think you can see the other benefits of this. I mean just
-            Look what it did for the command system. Made me slightly more broken inside and inside so you can make commands even
-            faster xD*/
+            // I got sick of seeing that long ass comment XD
             switch (CurrentMood)
             {
                 case Mood.Confused:
@@ -69,7 +64,7 @@
                 case Mood.Excited:
                     break;
             }
-            return "me no smart yet";
+            return "I don't no how to smart just yet. Sorry.";
         }
         private static string ProcessCommand(string message)
         {
@@ -104,7 +99,7 @@
                 {
                     submessageTokenString += $"{tokenId} ";
                 }
-                submessageTokenString = submessageTokenString.TrimEnd(); //I spent 15 minutes before I forgot to have "submessageTokens = "................ Dammit JavaScript.
+                submessageTokenString = submessageTokenString.TrimEnd();
                 for (byte i = 0; i < CommandData.Commands.Length; i += 1)
                 {
                     if (submessageTokenString == CommandData.Commands[i].scheme.Trim())
@@ -118,7 +113,7 @@
                             {
                                 parameters.Add(submessages[index]);
                             }
-                            var result = method.Invoke(new Commands(), parameters.ToArray()); //Var is NOT being used because "it can be", or because "it's easier".
+                            var result = method.Invoke(new Commands(), parameters.ToArray()); // I understand m88
                             if (result == null)
                             {
                                 return null;
