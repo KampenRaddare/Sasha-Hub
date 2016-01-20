@@ -17,6 +17,7 @@
             internal Token[] Tokens;
             internal Callback Callback;
         }
+
         private const string saidNothing = "Scared to say something meaningfull?";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         private const string nullError = "String passed to Sasha.Command() can't be null!";
@@ -24,12 +25,34 @@
         private delegate string Callback(sbyte[] n, string[] t);
         private enum Token
         {
-            paramater = 0, help, define, find, get, make, calculate, commit, suicide, sudoku, stocks, joke, weather
+            paramater = 0,
+            help,
+            define,
+            find,
+            get,
+            make,
+            calculate,
+            commit,
+            suicide,
+            sudoku,
+            stocks,
+            joke,
+            weather
         };
         private enum Mood
         {
-            // Add moods
-        }
+            Happy,
+            Sad,
+            Tipsy,
+            Flirty,
+            Sick,
+            Silly,
+            Smug,
+            Sleepy,
+            Loving,
+            Confused,
+            Excited
+        };
         private static readonly IntCmd[] Commands = new IntCmd[]
         {
             new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t)
@@ -85,11 +108,13 @@
                 return null;
             })
         };
+
         private static string Chat(string message)
         {
-            // Do whatever with plain text and use Mood enum
+            // I am not for sure how to process plain chat?
             return "me no smart yet";
         }
+
         internal static string Command(string command)
         {
             if (command != null)
