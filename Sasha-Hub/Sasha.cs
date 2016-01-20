@@ -1,7 +1,7 @@
 ﻿namespace Sasha_Hub
 {
     using System;
-    using System.Linq;
+    using System.Linq; // I hate linq XD
     using System.Text.RegularExpressions;
     using Sasha_Hub.Commands;
 
@@ -24,11 +24,11 @@
         private delegate string Callback(sbyte[] n, string[] t);
         private enum Token
         {
-            paramater = 0, help, define, find, get, make, calculate, stocks, joke, weather
+            paramater = 0, help, define, find, get, make, calculate, commit, suicide, stocks, joke, weather
         };
         private enum Mood
         {
-            //Add moods
+            // Add moods
         }
         private static readonly IntCmd[] Commands = new IntCmd[]
         {
@@ -70,8 +70,14 @@
             {
                 return Calculate.AllOperations(t[-n[1]],t[-n[2]]);
             }),
-            new IntCmd(new Token[]{Token.calculate,Token.paramater,Token.paramater,Token.paramater},delegate(sbyte[] n, string[] t) {
+            new IntCmd(new Token[]{Token.calculate,Token.paramater,Token.paramater,Token.paramater},delegate(sbyte[] n, string[] t)
+            {
                 return Calculate.OperatorSupplied(t[-n[1]],t[-n[2]],t[-n[3]]);
+            }),
+            new IntCmd(new Token[]{Token.commit, Token.suicide},delegate(sbyte[] n, string[] t)
+            {
+                Commit.Suicide();
+                return null;
             })
         };
         private static string Chat(string message)

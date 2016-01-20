@@ -108,6 +108,7 @@
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\Calculate.cs" />
+    <Compile Include="Commands\Commit.cs" />
     <Compile Include="Commands\Define.cs" />
     <Compile Include="Commands\Find.cs" />
     <Compile Include="Commands\Get.cs" />
