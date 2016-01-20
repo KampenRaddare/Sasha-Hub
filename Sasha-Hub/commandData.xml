@@ -13,6 +13,7 @@
   <token>stocks</token><!--10-->
   <token>joke</token><!--11-->
   <token>weather</token><!--12-->
+  <!--! ONLY ADD NEW TOKENS BELOW THIS LINE -->
   <!--! ONLY ADD NEW TOKENS ABOVE THIS LINE -->
   <command>
     <scheme>1</scheme> <!-- TOKEN CHAIN - SPACE SEPARATED NUMBERS -->
