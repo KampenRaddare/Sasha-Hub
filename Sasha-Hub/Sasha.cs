@@ -24,7 +24,7 @@
         private delegate string Callback(sbyte[] n, string[] t);
         private enum Token
         {
-            paramater = 0, help, define, find, get, make, calculate, commit, suicide, stocks, joke, weather
+            paramater = 0, help, define, find, get, make, calculate, commit, suicide, sudoku, stocks, joke, weather
         };
         private enum Mood
         {
@@ -77,6 +77,11 @@
             new IntCmd(new Token[]{Token.commit, Token.suicide},delegate(sbyte[] n, string[] t)
             {
                 Commit.Suicide();
+                return null;
+            }),
+            new IntCmd(new Token[]{Token.commit, Token.sudoku},delegate(sbyte[] n, string[] t)
+            {
+                Commit.Sudoku();
                 return null;
             })
         };
