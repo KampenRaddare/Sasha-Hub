@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sasha_Hub"
         mc:Ignorable="d"
-        Title="Help" Height="260" Width="373" WindowStyle="ToolWindow" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterOwner">
+        Title="Help" Height="260" Width="373" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Button x:Name="button" Content="Done" HorizontalAlignment="Left" Margin="260,183,0,0" VerticalAlignment="Top" Width="85" Click="button_Click"/>
         <Label x:Name="label" Content="Please select a command you need help with:" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.385" FontSize="16" Height="50" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" FontWeight="Bold" HorizontalAlignment="Left" Width="352"/>
-        <Button x:Name="Calculate" Content="Calculate" HorizontalAlignment="Left" Margin="15,60,0,0" VerticalAlignment="Top" Width="165"/>
-        <Button x:Name="Define" Content="Define" HorizontalAlignment="Left" Margin="15,97,0,0" VerticalAlignment="Top" Width="165"/>
-        <Button x:Name="Find" Content="Find" HorizontalAlignment="Left" Margin="15,134,0,0" VerticalAlignment="Top" Width="165"/>
-        <Button x:Name="Get" Content="Get" HorizontalAlignment="Left" Margin="185,60,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button x:Name="Help" Content="Help" HorizontalAlignment="Left" Margin="185,97,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button x:Name="Make" Content="Make" HorizontalAlignment="Left" Margin="185,134,0,0" VerticalAlignment="Top" Width="160" Focusable="False" IsTabStop="False" TabIndex="0"/>
+        <Button x:Name="Calculate" Content="Calculate" HorizontalAlignment="Left" Margin="15,60,0,0" VerticalAlignment="Top" Width="165" Click="Calculate_Click"/>
+        <Button x:Name="Define" Content="Define" HorizontalAlignment="Left" Margin="15,97,0,0" VerticalAlignment="Top" Width="165" Click="Define_Click"/>
+        <Button x:Name="Find" Content="Find" HorizontalAlignment="Left" Margin="15,134,0,0" VerticalAlignment="Top" Width="165" Click="Find_Click"/>
+        <Button x:Name="Get" Content="Get" HorizontalAlignment="Left" Margin="185,60,0,0" VerticalAlignment="Top" Width="160" Click="Get_Click"/>
+        <Button x:Name="Help" Content="Help" HorizontalAlignment="Left" Margin="185,97,0,0" VerticalAlignment="Top" Width="160" Click="Help_Click"/>
+        <Button x:Name="Make" Content="Make" HorizontalAlignment="Left" Margin="185,134,0,0" VerticalAlignment="Top" Width="160" Focusable="False" IsTabStop="False" TabIndex="0" Click="Make_Click"/>
     </Grid>
 </Window>

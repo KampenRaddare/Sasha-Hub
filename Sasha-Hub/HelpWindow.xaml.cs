@@ -28,5 +28,35 @@ namespace Sasha_Hub
         {
             Close();
         }
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Usage: Calcuate 2 2 or Calculate 2 *operation in words* 2", "Calculate");
+        }
+
+        private void Get_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Usage: Get Weather", "Get");
+        }
+
+        private void Define_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Usage: Define *Word*", "Define");
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Usage: Help or Help *Command*", "Help");
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Usage: Find *Search Term*", "Find");
+        }
+
+        private void Make_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Usage: Make Joke", "Make");
+        }
     }
 }
