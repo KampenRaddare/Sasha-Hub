@@ -1,46 +1,17 @@
-﻿namespace Sasha_Hub
-{
+﻿namespace Sasha_Hub { //Sorry about the formatting my visual studio did this, plus it's a lot easier for me to work in familiar formatting.
     using System;
-    using System.Linq; // I hate linq XD
+    using Sasha_Hub;
+    using System.IO;
+    using System.Reflection;
+    using System.Collections.Generic;
     using System.Text.RegularExpressions;
-    using Sasha_Hub.Commands;
-
-    internal static class Sasha
-    {
-        private sealed class IntCmd
-        {
-            internal IntCmd(Token[] tokens, Callback callback)
-            {
-                Callback = callback;
-                Tokens = tokens;
-            }
-            internal Token[] Tokens;
-            internal Callback Callback;
-        }
-
+    using System.Xml.Serialization;
+    internal static class Sasha {
         private const string saidNothing = "Scared to say something meaningfull?";
         private const string somethingNotGood = "Something went wrong. Brace yourself.";
         private const string nullError = "String passed to Sasha.Command() can't be null!";
         private const string errorString = "error";
-        private delegate string Callback(sbyte[] n, string[] t);
-        private enum Token
-        {
-            paramater = 0,
-            help,
-            define,
-            find,
-            get,
-            make,
-            calculate,
-            commit,
-            suicide,
-            sudoku,
-            stocks,
-            joke,
-            weather
-        };
-        private enum Mood
-        {
+        private enum Mood {
             Happy,
             Sad,
             Tipsy,
@@ -53,126 +24,75 @@
             Confused,
             Excited
         };
-        private static readonly IntCmd[] Commands = new IntCmd[]
-        {
-            new IntCmd(new Token[]{Token.help},delegate(sbyte[] n, string[] t)
-            {
-                Help.OpenWindow();
-                return null;
-            }),
-            new IntCmd(new Token[]{Token.help,Token.paramater},delegate(sbyte[] n, string[] t)
-            {
-                Help.OpenWindow(t[-n[1]]);
-                return null;
-            }),
-            new IntCmd(new Token[]{Token.define,Token.paramater},delegate(sbyte[] n, string[] t)
-            {
-                return Define.Word(t[-n[1]]);
-            }),
-            new IntCmd(new Token[]{Token.find,Token.paramater},delegate(sbyte[] n, string[] t)
-            {
-                return Define.Word(t[-n[1]]);
-            }),
-            new IntCmd(new Token[]{Token.get,Token.weather},delegate(sbyte[] n, string[] t)
-            {
-                return Get.Weather();
-            }),
-            new IntCmd(new Token[]{Token.get,Token.stocks},delegate(sbyte[] n, string[] t)
-            {
-                return Get.Stocks();
-            }),
-            new IntCmd(new Token[]{Token.get,Token.stocks,Token.paramater},delegate(sbyte[] n, string[] t)
-            {
-                return Get.Stocks(t[-n[1]]);
-            }),
-            new IntCmd(new Token[]{Token.make,Token.joke},delegate(sbyte[] n, string[] t)
-            {
-                return Make.Joke();
-            }),
-            new IntCmd(new Token[]{Token.calculate,Token.paramater,Token.paramater},delegate(sbyte[] n, string[] t)
-            {
-                return Calculate.AllOperations(t[-n[1]],t[-n[2]]);
-            }),
-            new IntCmd(new Token[]{Token.calculate,Token.paramater,Token.paramater,Token.paramater},delegate(sbyte[] n, string[] t)
-            {
-                return Calculate.OperatorSupplied(t[-n[1]],t[-n[2]],t[-n[3]]);
-            }),
-            new IntCmd(new Token[]{Token.commit, Token.suicide},delegate(sbyte[] n, string[] t)
-            {
-                Commit.Suicide();
-                return null;
-            }),
-            new IntCmd(new Token[]{Token.commit, Token.sudoku},delegate(sbyte[] n, string[] t)
-            {
-                Commit.Sudoku();
-                return null;
-            })
-        };
-
-        private static string Chat(string message)
-        {
-            // I am not for sure how to process plain chat?
-            return "me no smart yet";
-        }
-
-        internal static string Command(string command)
-        {
-            if (command != null)
-            {
-                command = command.Trim();
-                if (command != "")
-                {
-                    string[] tokens = command.Split(' ');
-                    sbyte[] numericalTokens = new sbyte[tokens.Length];
-                    Token[] finalTokens = new Token[tokens.Length];
-                    for (byte i = 0; i < tokens.Length; i += 1)
-                    {
-                        try
-                        {
-                            if (!tokens[i].All(char.IsDigit))
-                            {
-                                numericalTokens[i] = (sbyte)(Token)Enum.Parse(typeof(Token), Regex.Replace(tokens[i], "\\p{P}+", ""), true);
-                                finalTokens[i] = (Token)numericalTokens[i];
-                            }
-                            else
-                            {
-                                numericalTokens[i] = (sbyte)-i;
-                                finalTokens[i] = 0;
-                            }
-                        }
-                        catch
-                        {
-                            numericalTokens[i] = (sbyte)-i;
-                            finalTokens[i] = 0;
-                        }
+        private static Mood currentMood = Mood.Excited;
+        private static readonly commandData CommandData = (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml")); //Best line of code 2016
+        internal static string Interpret(string message) {
+            if(message != null) {
+                message = message.Trim();
+                if(message != "") {
+                    string commandReturn = ProcessCommand(message);
+                    if(commandReturn != "") {
+                        return commandReturn;
                     }
-                    foreach (IntCmd intcmd in Commands)
-                    {
-                        if (Enumerable.SequenceEqual(intcmd.Tokens, finalTokens))
-                        {
-                            string returnValue = intcmd.Callback(numericalTokens, tokens);
-                            switch (returnValue)
-                            {
-                                case errorString:
-                                    return somethingNotGood;
-                                case null:
-                                    return null;
-                                default:
-                                    return returnValue;
-                            }
-                        }
-                    }
-                }
-                else
-                {
+                } else {
                     return saidNothing;
                 }
-            }
-            else
-            {
+            } else {
                 throw new Exception(nullError);
             }
-            return Chat(command);
+            return ProcessChat(message);
+        }
+        private static string ProcessChat(string message) {
+            /* SPAAAAAAAAAAAAAAAACEEEEEEEEEE MAGGGGGGGGGICCCCCCCCCCCCCC
+            If you want me to do the steps I sent you in the really long text message let me know but I'll leave it up to you.
+            I want to set this entire part of the system up in xml (if you can wait a day)
+            That way there's no internal enums or switch statements. I think you can see the other benefits of this. I mean just
+            Look what it did for the command system. Made me slightly more broken inside and inside so you can make commands even
+            faster xD*/
+            switch(currentMood) {
+                case Mood.Confused:
+                    break;
+                case Mood.Excited:
+                    break;
+            }
+            return "me no smart yet";
+        }
+        private static string ProcessCommand(string message) {
+            string[] submessages = message.Split(' ');
+            string submessageTokens = "";
+            List<byte> paramaterIndexes = new List<byte>();
+            for(byte i = 0;i < submessages.Length;i += 1) {
+                string currentString = Regex.Replace(submessages[i].ToLowerInvariant(),"\\p{P}+","");
+                for(byte e = 0; e < CommandData.Tokens.Length;e+=1) {
+                    if(currentString == CommandData.Tokens[e].Value.ToLowerInvariant()) {
+                        submessageTokens += $"{e+1} ";
+                        break;
+                    }
+                }
+                if(submessages[i] == null) {
+                    submessageTokens += "0 ";
+                    paramaterIndexes.Add(i);
+                }
+            }
+            submessageTokens = submessageTokens.Trim(); //I spent 15 minutes before I forgot to have "submessageTokens = "................ Dammit JavaScript.
+            for(byte i = 0;i < CommandData.Commands.Length;i += 1) {
+                if(submessageTokens == CommandData.Commands[i].scheme.Trim()) {
+                    Type type = typeof(Commands);
+                    MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
+                    List<string> parameters = new List<string>();
+                    foreach(byte index in paramaterIndexes) {
+                        parameters.Add(submessages[index]);
+                    }
+                    var result = method.Invoke(new Commands(),parameters.ToArray()); //Var is NOT being used because "it can be", or because "it's easier".
+                    if(result == null) {
+                        return null;
+                    } else {
+                        return (string)result;
+                    }
+                    break;
+                }
+            }
+            return "";
         }
     }
 }

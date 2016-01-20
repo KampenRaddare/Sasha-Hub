@@ -86,6 +86,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.XML" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -107,13 +108,8 @@
     <Compile Include="AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commands\Calculate.cs" />
-    <Compile Include="Commands\Commit.cs" />
-    <Compile Include="Commands\Define.cs" />
-    <Compile Include="Commands\Find.cs" />
-    <Compile Include="Commands\Get.cs" />
-    <Compile Include="Commands\Help.cs" />
-    <Compile Include="Commands\Make.cs" />
+    <Compile Include="commandData.cs" />
+    <Compile Include="Commands.cs" />
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
@@ -184,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SashaPurpleIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="commandData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<commandData>
+  <token>help</token><!--1-->
+  <token>define</token><!--2-->
+  <token>find</token><!--3-->
+  <token>get</token><!--4-->
+  <token>make</token><!--5-->
+  <token>calculate</token><!--6-->
+  <token>commit</token><!--7-->
+  <token>suicide</token><!--8-->
+  <token>sudoku</token><!--9-->
+  <token>stocks</token><!--10-->
+  <token>joke</token><!--11-->
+  <token>weather</token><!--12-->
+  <!--! ONLY ADD NEW TOKENS ABOVE THIS LINE -->
+  <command>
+    <scheme>1</scheme><!-- TOKEN CHAIN - SPACE SEPARATED NUMBERS -->
+    <action>Help</action><!-- METHOD BINDING - USES COMMANDS.CS -->
+  </command>
+  <command>
+    <scheme>1 0</scheme>
+    <action>Help</action>
+  </command>
+  <command>
+    <scheme>2 0</scheme>
+    <action>Word</action>
+  </command>
+  <command>
+    <scheme>3 0</scheme>
+    <action>Find</action>
+  </command>
+  <command>
+    <scheme>4 10</scheme>
+    <action>Stocks</action>
+  </command>
+  <command>
+    <scheme>4 10 0</scheme>
+    <action>Stocks</action>
+  </command>
+  <command>
+    <scheme>4 12</scheme>
+    <action>Weather</action>
+  </command>
+  <command>
+    <scheme>9 11</scheme>
+    <action>MakeOffensiveJoke</action>
+  </command>
+  <command>
+    <scheme>5 11</scheme>
+    <action>Joke</action>
+  </command>
+  <command>
+    <scheme>7 8</scheme>
+    <action>Suicide</action>
+  </command>
+  <command>
+    <scheme>7 9</scheme>
+    <action>Sudoku</action>
+  </command>
+  <command>
+    <scheme>6 0 0</scheme>
+    <action>Calculate</action>
+  </command>
+  <command>
+    <scheme>6 0 0 0</scheme>
+    <action>Calculate</action>
+  </command>
+</commandData>
