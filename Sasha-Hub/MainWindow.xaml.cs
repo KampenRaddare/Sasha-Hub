@@ -77,7 +77,7 @@ namespace Sasha_Hub
             if (SayBox.Text != "")
             {
                 ConversationViewer.Text += $"{Environment.NewLine}You: {SayBox.Text}";
-                string sashaMessage = Sasha.Command(SayBox.Text);
+                string sashaMessage = Sasha.Interpret(SayBox.Text);
                 SayBox.Text = "";
                 if (sashaMessage != null)
                 { // If its null its a command that doesn't return a message, like opening a webpage, or help
