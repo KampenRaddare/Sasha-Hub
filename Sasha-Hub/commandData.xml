@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <commandData>
+  <!-- 0 IS ALWAYS A PARAMATER -->
   <token>help</token><!--1-->
   <token>define</token><!--2-->
   <token>find</token><!--3-->
@@ -14,8 +15,8 @@
   <token>weather</token><!--12-->
   <!--! ONLY ADD NEW TOKENS ABOVE THIS LINE -->
   <command>
-    <scheme>1</scheme><!-- TOKEN CHAIN - SPACE SEPARATED NUMBERS -->
-    <action>Help</action><!-- METHOD BINDING - USES COMMANDS.CS -->
+    <scheme>1</scheme> <!-- TOKEN CHAIN - SPACE SEPARATED NUMBERS -->
+    <action>Help</action> <!-- METHOD BINDING - USES COMMANDS.CS PUBLIC METHODS -->
   </command>
   <command>
     <scheme>1 0</scheme>
@@ -35,7 +36,7 @@
   </command>
   <command>
     <scheme>4 10 0</scheme>
-    <action>Stocks</action>
+    <action>StocksSpecific</action>
   </command>
   <command>
     <scheme>4 12</scheme>
@@ -43,7 +44,7 @@
   </command>
   <command>
     <scheme>9 11</scheme>
-    <action>MakeOffensiveJoke</action>
+    <action>OffensiveJoke</action>
   </command>
   <command>
     <scheme>5 11</scheme>
@@ -59,10 +60,10 @@
   </command>
   <command>
     <scheme>6 0 0</scheme>
-    <action>Calculate</action>
+    <action>CalculateNoOperator</action>
   </command>
   <command>
     <scheme>6 0 0 0</scheme>
-    <action>Calculate</action>
+    <action>CalculateNoOperator</action>
   </command>
 </commandData>

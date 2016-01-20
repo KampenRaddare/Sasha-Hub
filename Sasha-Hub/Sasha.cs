@@ -7,10 +7,11 @@
     using System.Text.RegularExpressions;
     using System.Xml.Serialization;
     internal static class Sasha {
-        private const string saidNothing = "Scared to say something meaningfull?";
-        private const string somethingNotGood = "Something went wrong. Brace yourself.";
-        private const string nullError = "String passed to Sasha.Command() can't be null!";
-        private const string errorString = "error";
+        private const string SaidNothing = "Scared to say something meaningfull?";
+        private const string NullError = "String passed to Sasha.Command() can't be null!";
+        internal const string InternalErrorString = "error";
+        private const string ErrorMessage = "Something went wrong. Brace yourself.";
+        private const string IForGotHow = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
         private enum Mood {
             Happy,
             Sad,
@@ -24,7 +25,7 @@
             Confused,
             Excited
         };
-        private static Mood currentMood = Mood.Excited;
+        private static Mood CurrentMood = Mood.Excited;
         private static readonly commandData CommandData = (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml")); //Best line of code 2016
         internal static string Interpret(string message) {
             if(message != null) {
@@ -35,10 +36,10 @@
                         return commandReturn;
                     }
                 } else {
-                    return saidNothing;
+                    return SaidNothing;
                 }
             } else {
-                throw new Exception(nullError);
+                throw new Exception(NullError);
             }
             return ProcessChat(message);
         }
@@ -49,7 +50,7 @@
             That way there's no internal enums or switch statements. I think you can see the other benefits of this. I mean just
             Look what it did for the command system. Made me slightly more broken inside and inside so you can make commands even
             faster xD*/
-            switch(currentMood) {
+            switch(CurrentMood) {
                 case Mood.Confused:
                     break;
                 case Mood.Excited:
@@ -59,37 +60,50 @@
         }
         private static string ProcessCommand(string message) {
             string[] submessages = message.Split(' ');
-            string submessageTokens = "";
-            List<byte> paramaterIndexes = new List<byte>();
-            for(byte i = 0;i < submessages.Length;i += 1) {
-                string currentString = Regex.Replace(submessages[i].ToLowerInvariant(),"\\p{P}+","");
-                for(byte e = 0; e < CommandData.Tokens.Length;e+=1) {
-                    if(currentString == CommandData.Tokens[e].Value.ToLowerInvariant()) {
-                        submessageTokens += $"{e+1} ";
+            if(submessages.Length <= 127) {
+                sbyte[] submessageTokens = new sbyte[submessages.Length];
+                for(int i = 0;i < submessageTokens.Length;i+=1) {
+                    submessageTokens[i] = -1;
+                }
+                List<byte> parameterIndexes = new List<byte>();
+                for(byte i = 0;i < submessages.Length;i += 1) {
+                    string currentString = Regex.Replace(submessages[i].ToLowerInvariant(),"\\p{P}+","");
+                    for(byte e = 0;e < CommandData.Tokens.Length;e += 1) {
+                        if(currentString == CommandData.Tokens[e].Value.ToLowerInvariant()) {
+                            submessageTokens[i] = (sbyte)(e + 1);
+                            break;
+                        }
+                    }
+                    if(submessageTokens[i] == -1) {
+                        submessageTokens[i] = 0;
+                        parameterIndexes.Add(i);
+                    }
+                }
+                string submessageTokenString = "";
+                foreach(int tokenId in submessageTokens) {
+                    submessageTokenString += $"{tokenId} ";
+                }
+                submessageTokenString = submessageTokenString.TrimEnd(); //I spent 15 minutes before I forgot to have "submessageTokens = "................ Dammit JavaScript.
+                for(byte i = 0;i < CommandData.Commands.Length;i += 1) {
+                    if(submessageTokenString == CommandData.Commands[i].scheme.Trim()) {
+                        try {
+                            Type type = typeof(Commands);
+                            MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
+                            List<string> parameters = new List<string>();
+                            foreach(byte index in parameterIndexes) {
+                                parameters.Add(submessages[index]);
+                            }
+                            var result = method.Invoke(new Commands(),parameters.ToArray()); //Var is NOT being used because "it can be", or because "it's easier".
+                            if(result == null) {
+                                return null;
+                            } else {
+                                return (string)result;
+                            }
+                        } catch {
+                            return IForGotHow;
+                        }
                         break;
                     }
-                }
-                if(submessages[i] == null) {
-                    submessageTokens += "0 ";
-                    paramaterIndexes.Add(i);
-                }
-            }
-            submessageTokens = submessageTokens.Trim(); //I spent 15 minutes before I forgot to have "submessageTokens = "................ Dammit JavaScript.
-            for(byte i = 0;i < CommandData.Commands.Length;i += 1) {
-                if(submessageTokens == CommandData.Commands[i].scheme.Trim()) {
-                    Type type = typeof(Commands);
-                    MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
-                    List<string> parameters = new List<string>();
-                    foreach(byte index in paramaterIndexes) {
-                        parameters.Add(submessages[index]);
-                    }
-                    var result = method.Invoke(new Commands(),parameters.ToArray()); //Var is NOT being used because "it can be", or because "it's easier".
-                    if(result == null) {
-                        return null;
-                    } else {
-                        return (string)result;
-                    }
-                    break;
                 }
             }
             return "";

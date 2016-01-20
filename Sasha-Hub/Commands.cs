@@ -3,10 +3,14 @@
     using System.Windows;
     using System.Diagnostics;
     public sealed class Commands {
-        //this is where commands live now. Since I just pasted all the methods here MAJOR reorganizing needs to be done.. My 'job' is just to make things work efficiently lol
-        //All methods must have a return type of string or void
-        //All method overloads must be strings
-        public string Calculate(string number1,string number2) {
+        /*this is where commands live now. Since I just pasted all the methods here MAJOR reorganizing needs to be done.. My 'job' is just to make things work efficiently lol
+        All methods must have a return type of string or void
+        All method overloads must be strings
+        All methods must be public and not static
+        METHODS MUST NOT SHARE A NAME
+        *****Even if they have seperate overloads*****
+        To make Sasha say that something bad happened/whatever when a generic error happens in a method return/use Sasha.InternalErrorString*/
+        public string CalculateNoOperator(string number1,string number2) {
             // Since no operator is supplied
             // returns every possible solution
             int num1 =  Convert.ToInt32(number1);
@@ -16,7 +20,7 @@
                 "Added = " + (num1 + num2) + "\n" +
                 "Subtracted = " + (num1 - num2); //DO YOU EVEN FUCKING C# 6 BRUH!?
         }
-        public string Calculate(string number1,string numberOperator,string number2) {
+        public string CalculateOperator(string number1,string numberOperator,string number2) {
             // Since operator is supplied
             // returns specific solution
             int num1 =  Convert.ToInt32(number1);
@@ -56,7 +60,7 @@
             // ^ Sounds like a joke but it's true xD Gg economy
         }
 
-        public string Stocks(string stock) {
+        public string StocksSpecific(string stock) {
             return $"{stock} looks like its doing good. Kinda looks like a mountain!";
         }
         public void Help() {
