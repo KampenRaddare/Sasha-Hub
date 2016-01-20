@@ -1,8 +1,10 @@
-﻿namespace Sasha_Hub {
+﻿namespace Sasha_Hub
+{
     using System;
     using System.Windows;
     using System.Diagnostics;
-    public sealed class Commands {
+    public sealed class Commands
+    {
         /*this is where commands live now. Since I just pasted all the methods here MAJOR reorganizing needs to be done.. My 'job' is just to make things work efficiently lol
         All methods must have a return type of string or void
         All method overloads must be strings
@@ -10,22 +12,25 @@
         METHODS MUST NOT SHARE A NAME
         *****Even if they have seperate overloads*****
         To make Sasha say that something bad happened/whatever when a generic error happens in a method return/use Sasha.InternalErrorString*/
-        public string CalculateNoOperator(string number1,string number2) {
+        public string CalculateNoOperator(string number1, string number2)
+        {
             // Since no operator is supplied
             // returns every possible solution
-            int num1 =  Convert.ToInt32(number1);
-            int num2 =  Convert.ToInt32(number2);
+            int num1 = Convert.ToInt32(number1);
+            int num2 = Convert.ToInt32(number2);
             return "Multiplied = " + (num1 * num2).ToString() + "\n" +
                 "Divided = " + (num1 / num2) + "\n" +
                 "Added = " + (num1 + num2) + "\n" +
                 "Subtracted = " + (num1 - num2); //DO YOU EVEN FUCKING C# 6 BRUH!?
         }
-        public string CalculateOperator(string number1,string numberOperator,string number2) {
+        public string CalculateOperator(string number1, string numberOperator, string number2)
+        {
             // Since operator is supplied
             // returns specific solution
-            int num1 =  Convert.ToInt32(number1);
-            int num2 =  Convert.ToInt32(number2);
-            switch(numberOperator) {
+            int num1 = Convert.ToInt32(number1);
+            int num2 = Convert.ToInt32(number2);
+            switch (numberOperator)
+            {
                 case "plus":
                     return (num1 + num2).ToString();
                 case "divide":
@@ -38,43 +43,52 @@
                     return "Fuck you. You broke me. D;";
             }
         }
-        public void Suicide() {
-             MessageBox.Show("Sasha killed herself!","Suicide!");
-             Environment.Exit(1);
+        public void Suicide()
+        {
+            MessageBox.Show("Sasha killed herself!", "Suicide!");
+            Environment.Exit(1);
         }
 
-        public void Sudoku() {
-             MessageBox.Show("Sasha committed Sudoku!","Sudoku!");
-             Environment.Exit(1);
+        public void Sudoku()
+        {
+            MessageBox.Show("Sasha committed Sudoku!", "Sudoku!");
+            Environment.Exit(1);
         }
-        public string Define(string word) {
+        public string Define(string word)
+        {
             return "I don't feel like defining a word right now you little bitch!";
         }
-        public string Weather() {
+        public string Weather()
+        {
             // IP location->web service->weather service->xml->process | Me can do it later I guess
             return "27. This is the weather right now. Impressed?";
         }
 
-        public string Stocks() {
+        public string Stocks()
+        {
             return "The US stock market is down more than 2.3 trillion dollars this year.";
             // ^ Sounds like a joke but it's true xD Gg economy
         }
 
-        public string StocksSpecific(string stock) {
+        public string StocksSpecific(string stock)
+        {
             return $"{stock} looks like its doing good. Kinda looks like a mountain!";
         }
-        public void Help() {
+        public void Help()
+        {
             // Open the help window to no specific command section
             HelpWindow HALP = new HelpWindow();
             HALP.Show();
         }
 
-        public void OpenWindow(string command) {
+        public void OpenWindow(string command)
+        {
             // Open the help window to specific command section
-             MessageBox.Show("No help for you, you little bitch.");
+            MessageBox.Show("No help for you, you little bitch.");
         }
-        public string Joke() {
-             Random r = new  Random(); // Don't want to put a using statement for just this :/
+        public string Joke()
+        {
+            Random r = new Random(); // Don't want to put a using statement for just this :/
             string[] jokes =
             {
                 "A husband and wife are trying to set up a new password for their computer. The husband puts, 'Mypenis,' and the wife falls on the ground laughing because on the screen it says, 'Error. Not long enough.'",
@@ -86,12 +100,13 @@
             };
             int index = 0;
 
-            index = r.Next(index,jokes.Length);    // Yeah I fucked this up before. I suck :D
-             Debug.WriteLine(index);
+            index = r.Next(index, jokes.Length);    // Yeah I fucked this up before. I suck :D
+            Debug.WriteLine(index);
 
             return jokes[index];
         }
-        public string OffensiveJoke() {
+        public string OffensiveJoke()
+        {
             return "Was an inside job?";
         }
     }
