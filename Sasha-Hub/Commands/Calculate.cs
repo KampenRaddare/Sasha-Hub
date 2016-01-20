@@ -28,7 +28,7 @@
             {
                 case "plus":
                     return (num1 + num2).ToString();
-                case "divided by":
+                case "divide":
                     return (num1 / num2).ToString();
                 case "subtract":
                     return (num1 - num2).ToString();
