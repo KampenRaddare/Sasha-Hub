@@ -20,11 +20,9 @@
             // returns every possible solution
             int num1 = Convert.ToInt32(number1);
             int num2 = Convert.ToInt32(number2);
-            return "Multiplied = " + (num1 * num2).ToString() + "\n" +
-                "Divided = " + (num1 / num2) + "\n" +
-                "Added = " + (num1 + num2) + "\n" +
-                "Subtracted = " + (num1 - num2); //DO YOU EVEN FUCKING C# 6 BRUH!?
+            return $"Multiplied = {num1 * num2}{Environment.NewLine}Divided = {num1 / num2}{Environment.NewLine}Added = {num1 + num2}{Environment.NewLine}Substracted = {num1 - num2}";
         }
+
         public string CalculateOperator(string number1, string numberOperator, string number2)
         {
             // Since operator is supplied
@@ -45,6 +43,7 @@
                     return "Fuck you. You broke me. D;";
             }
         }
+
         public void Suicide()
         {
             MessageBox.Show("Sasha killed herself!", "Suicide!");
@@ -56,10 +55,12 @@
             MessageBox.Show("Sasha committed Sudoku!", "Sudoku!");
             Environment.Exit(1);
         }
+
         public string Define(string word)
         {
             return "I don't feel like defining a word right now you little bitch!";
         }
+
         public string Weather(string location)
         {
             // IP location->web service->weather service->xml->process
@@ -101,6 +102,7 @@
         {
             return $"{stock} looks like its doing good. Kinda looks like a mountain!";
         }
+
         public void Help()
         {
             // Open the help window to no specific command section
@@ -113,6 +115,7 @@
             // Open the help window to specific command section
             MessageBox.Show("No help for you, you little bitch.");
         }
+
         public string Joke()
         {
             Random r = new Random();
@@ -131,6 +134,7 @@
 
             return jokes[index];
         }
+
         public string OffensiveJoke()
         {
             Random r = new Random();
@@ -150,10 +154,14 @@
 
             return offensiveJokes[index];
         }
-        public void TestCommand(string eeeee) {
+
+        public void TestCommand(string eeeee)
+        {
             throw new Exception("TRY TO STOP THIS YOU BITCH HAHAHAHAHA");
         }
-        public void Clear() {
+
+        public void Clear()
+        {
             //todo clear window chat
         }
     }

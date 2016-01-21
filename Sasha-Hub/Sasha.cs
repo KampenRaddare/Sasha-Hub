@@ -10,13 +10,13 @@
     using System.Xml.Serialization;
     internal static class Sasha
     {
-        private const string SaidNothing = "Scared to say something meaningfull?";
-        private const string NullError = "Overlaoded string on Sasha.Interpret() can't be null!";
+        private const string SaidNothing = "Scared to say something meaningful?";
+        private const string NullError = "Overloaded string on Sasha.Interpret() can't be null!";
         internal const string InternalErrorString = "error";
         private const string ErrorMessage = "Something went wrong. Brace yourself.";
         private const string deadInside = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
-        private const string commandsNotSetUp = "It appears none of my commands are working. Guess I'll ahve to kill myself!";
-        private const string meh = "Meh. If you say say.";
+        private const string commandsNotSetUp = "It appears none of my commands are working. Guess I'll have to kill myself!";
+        private const string meh = "Meh. If you say so."; // That said "say say" Good one.
         private enum Mood
         {
             Happy,
@@ -32,12 +32,13 @@
             Excited
         };
         private static Mood CurrentMood = Mood.Excited;
-        private static commandData getCommandData() {
+        private static commandData getCommandData()
+        {
             try
             {
                 return (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml"));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
                 return null;
@@ -46,43 +47,60 @@
         private static readonly commandData CommandData = getCommandData();
         internal static string Interpret(string message)
         {
-            try {
-                if(message != null) {
-                    if(CommandData != null) {
+            try
+            {
+                if (message != null)
+                {
+                    if (CommandData != null)
+                    {
                         message = message.Trim();
-                        if(message != "") {
+                        if (message != "")
+                        {
                             string commandReturn = ProcessCommand(message);
-                            if(commandReturn != "") {
+                            if (commandReturn != "")
+                            {
                                 return commandReturn;
                             }
-                        } else {
+                        }
+                        else
+                        {
                             return SaidNothing;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         return commandsNotSetUp;
                     }
-                } else {
+                }
+                else
+                {
                     throw new Exception(NullError);
                 }
                 return ProcessChat(message);
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 Debug.WriteLine(e.Message);
                 return deadInside;
             }
         }
         private static string ProcessChat(string message)
         {
-            char splitCharacter = Resources.chatdata.Substring(0,1)[0];
-            string[] fullArray = Resources.chatdata.Remove(0,1).Split(splitCharacter);
+            char splitCharacter = Resources.chatdata.Substring(0, 1)[0];
+            string[] fullArray = Resources.chatdata.Remove(0, 1).Split(splitCharacter);
             List<string[]> splitFullArray = new List<string[]>();
-            for(int i = 0;i < fullArray.Length-1;i+=2) {
-                splitFullArray.Add(new string[] {fullArray[i],fullArray[i+1]});
+            for (int i = 0; i < fullArray.Length - 1; i += 2)
+            {
+                splitFullArray.Add(new string[] { fullArray[i], fullArray[i + 1] });
             }
             //todo: sort splitFullArray by the string length of the first value of the contained string arrays
-            foreach(string[] chatsubarray in splitFullArray) {
-                if(message.Trim().ToLowerInvariant().IndexOf(chatsubarray[0].Trim().ToLowerInvariant()) != -1) {
+            foreach (string[] chatsubarray in splitFullArray)
+            {
+                if (message.Trim().ToLowerInvariant().IndexOf(chatsubarray[0].Trim().ToLowerInvariant()) != -1)
+                {
                     string returnMessage = chatsubarray[1];
-                    switch(CurrentMood){
+                    switch (CurrentMood)
+                    {
                         //todo: setup system for replacing things like "{happyInsult}" or '{sadVerb}" depending on current mood. You get the idea
                     }
                     //todo: setup returnMessage metaData tags for changing moods
@@ -130,33 +148,33 @@
                 {
                     if (submessageTokenString == CommandData.Commands[i].scheme.Trim())
                     {
-                            Type type = typeof(Commands);
-                            MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
-                            List<string> parameters = new List<string>();
-                            foreach (byte index in parameterIndexes)
+                        Type type = typeof(Commands);
+                        MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
+                        List<string> parameters = new List<string>();
+                        foreach (byte index in parameterIndexes)
+                        {
+                            parameters.Add(submessages[index]);
+                        }
+                        var result = method.Invoke(new Commands(), parameters.ToArray());
+                        if (result == null)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            string methodResult = (string)result;
+                            if (methodResult != InternalErrorString)
                             {
-                                parameters.Add(submessages[index]);
-                            }
-                            var result = method.Invoke(new Commands(), parameters.ToArray());
-                            if (result == null)
-                            {
-                                return null;
+                                return methodResult;
                             }
                             else
                             {
-                                string methodResult = (string)result;
-                                if(methodResult != InternalErrorString)
-                                {
-                                    return methodResult;
-                                }
-                                else
-                                {
-                                    return ErrorMessage;
-                                }
+                                return ErrorMessage;
                             }
                         }
-                        break;
-                    
+                    }
+                    break;
+
                 }
             }
             return "";

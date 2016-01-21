@@ -15,7 +15,7 @@ namespace Sasha_Hub
         public MainWindow()
         {
             InitializeComponent();
-            #region SETUP
+
             if (sashaImage == null)
             {
                 sashaImage = new BitmapImage();
@@ -28,7 +28,6 @@ namespace Sasha_Hub
                 sashaImage.EndInit();
             }
             Tag.Source = sashaImage;
-            #endregion
         }
 
         public void ToggleLoading()
@@ -90,7 +89,7 @@ namespace Sasha_Hub
                 ToggleLoading();
                 Thread thread = new Thread(delegate ()
                 {
-                    Thread.Sleep(sashaMessage.Length * 19); // Jokes were taking WAY to long so I changed this. Sorry.
+                    Thread.Sleep(sashaMessage.Length * 19);
                     this.Dispatcher.Invoke((Action)(() => {
                         ConversationViewer.Text += $"{Environment.NewLine}Sasha: {sashaMessage}";
                         ConversationViewer.ScrollToEnd();
