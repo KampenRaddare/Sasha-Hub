@@ -104,8 +104,9 @@
                 {
                     if (submessageTokenString == CommandData.Commands[i].scheme.Trim())
                     {
-                        try
-                        {
+                        // Only removed to see specific error thrown
+                        //try
+                        //{
                             Type type = typeof(Commands);
                             MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
                             List<string> parameters = new List<string>();
@@ -113,7 +114,7 @@
                             {
                                 parameters.Add(submessages[index]);
                             }
-                            var result = method.Invoke(new Commands(), parameters.ToArray()); // I understand m88
+                            var result = method.Invoke(new Commands(), parameters.ToArray());
                             if (result == null)
                             {
                                 return null;
@@ -122,11 +123,11 @@
                             {
                                 return (string)result;
                             }
-                        }
-                        catch
-                        {
-                            return IForGotHow;
-                        }
+                        //}
+                        //catch
+                        //{
+                         //   return IForGotHow;
+                        //}
                         break;
                     }
                 }

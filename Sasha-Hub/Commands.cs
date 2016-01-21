@@ -3,6 +3,8 @@
     using System;
     using System.Windows;
     using System.Diagnostics;
+    using System.Xml;
+
     public sealed class Commands
     {
         /*this is where commands live now. Since I just pasted all the methods here MAJOR reorganizing needs to be done.. My 'job' is just to make things work efficiently lol
@@ -58,10 +60,26 @@
         {
             return "I don't feel like defining a word right now you little bitch!";
         }
-        public string Weather()
+        public string Weather(string location)
         {
             // IP location->web service->weather service->xml->process | Me can do it later I guess
-            return "27. This is the weather right now. Impressed?";
+            string day = DateTime.Now.DayOfWeek.ToString();
+            string temp = null;
+            string high = null;
+            string low = null;
+
+            XmlDocument weather = new XmlDocument();
+            weather.Load(string.Format("http://www.google.com/ig/api?weather={0}", "Chicago"));
+
+            temp = weather.SelectSingleNode("/xml_api_reply/weather/current_conditions/temp_f").Attributes["data"].InnerText;
+            high = weather.SelectSingleNode("high").Attributes["data"].InnerText;
+            low = weather.SelectSingleNode("low").Attributes["data"].InnerText;
+
+            Debug.WriteLine(temp);
+            Debug.WriteLine(high);
+            Debug.WriteLine(low);
+
+            return "It is " + temp + "F in your city. With a high of " + high + " and a low of " + low;
         }
 
         public string Stocks()
