@@ -67,6 +67,7 @@
             string temp = null;
             string high = null;
             string low = null;
+            string measurement = null;
 
             XmlDocument weather = new XmlDocument();
             try
@@ -85,8 +86,9 @@
             temp = temperature.Attributes["value"].Value;
             high = temperature.Attributes["max"].Value;
             low = temperature.Attributes["min"].Value;
+            measurement = temperature.Attributes["unit"].Value;
 
-            return "It is " + temp + "F in your city. With a high of " + high + " and a low of " + low;
+            return "It is " + temp + " " + measurement + " in your city. With a high of " + high + " and a low of " + low; // No I don't C# 6. But I should lol
         }
 
         public string Stocks()
