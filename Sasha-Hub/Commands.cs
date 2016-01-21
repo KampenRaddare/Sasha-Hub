@@ -110,12 +110,6 @@
             HALP.Show();
         }
 
-        public void OpenWindow(string command)
-        {
-            // Open the help window to specific command section
-            MessageBox.Show("No help for you, you little bitch.");
-        }
-
         public string Joke()
         {
             Random r = new Random();
@@ -155,9 +149,9 @@
             return offensiveJokes[index];
         }
 
-        public void TestCommand(string eeeee)
+        public string TestCommand()
         {
-            throw new Exception("TRY TO STOP THIS YOU BITCH HAHAHAHAHA");
+            return "TRY TO STOP THIS YOU BITCH HAHAHAHAHA";
         }
 
         public void Clear()

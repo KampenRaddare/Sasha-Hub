@@ -15,7 +15,6 @@
         internal const string InternalErrorString = "error";
         private const string ErrorMessage = "Something went wrong. Brace yourself.";
         private const string deadInside = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
-        private const string commandsNotSetUp = "It appears none of my commands are working. Guess I'll have to kill myself!";
         private const string meh = "Meh. If you say so."; // That said "say say" Good one.
         private enum Mood
         {
@@ -67,10 +66,6 @@
                             return SaidNothing;
                         }
                     }
-                    else
-                    {
-                        return commandsNotSetUp;
-                    }
                 }
                 else
                 {
@@ -113,7 +108,7 @@
         private static string ProcessCommand(string message)
         {
             string[] submessages = message.Split(' ');
-            if (submessages.Length <= 127)
+            if (submessages.Length <= 126)
             {
                 sbyte[] submessageTokens = new sbyte[submessages.Length];
                 for (byte i = 0; i < submessageTokens.Length; i += 1)
@@ -144,7 +139,7 @@
                     submessageTokenString += $"{tokenId} ";
                 }
                 submessageTokenString = submessageTokenString.TrimEnd();
-                for (byte i = 0; i < CommandData.Commands.Length; i += 1)
+                for (int i = 0; i < CommandData.Commands.Length; i += 1)
                 {
                     if (submessageTokenString == CommandData.Commands[i].scheme.Trim())
                     {
@@ -172,9 +167,8 @@
                                 return ErrorMessage;
                             }
                         }
+                        break;
                     }
-                    break;
-
                 }
             }
             return "";

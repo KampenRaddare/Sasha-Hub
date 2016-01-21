@@ -20,10 +20,6 @@
     <action>Help</action> <!-- METHOD BINDING - USES COMMANDS.CS PUBLIC METHODS -->
   </command>
   <command>
-    <scheme>1 0</scheme>
-    <action>Help</action>
-  </command>
-  <command>
     <scheme>2 0</scheme>
     <action>Word</action>
   </command>
@@ -61,14 +57,14 @@
   </command>
   <command>
     <scheme>6 0 0</scheme>
-    <action>CalculateOperator</action>
-  </command>
-  <command>
-    <scheme>6 0 0 0</scheme>
     <action>CalculateNoOperator</action>
   </command>
   <command>
-    <scheme>9 8</scheme>
+    <scheme>6 0 0 0</scheme>
+    <action>CalculateOperator</action>
+  </command>
+  <command>
+    <scheme>9</scheme>
     <action>TestCommand</action>
   </command>
   <command>
