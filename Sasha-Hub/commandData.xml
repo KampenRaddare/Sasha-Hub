@@ -13,8 +13,9 @@
   <token>stocks</token><!--10-->
   <token>joke</token><!--11-->
   <token>weather</token><!--12-->
-  <!--! ONLY ADD NEW TOKENS BELOW THIS LINE -->
-  <!--! ONLY ADD NEW TOKENS ABOVE THIS LINE -->
+  <token>weather</token><!--13-->
+  <token>clear</token><!--14-->
+  <!--! ONLY ADD NEW TOKENS ON THE LINE DIRECTLY ABOVE -->
   <command>
     <scheme>1</scheme> <!-- TOKEN CHAIN - SPACE SEPARATED NUMBERS -->
     <action>Help</action> <!-- METHOD BINDING - USES COMMANDS.CS PUBLIC METHODS -->
@@ -66,5 +67,13 @@
   <command>
     <scheme>6 0 0 0</scheme>
     <action>CalculateNoOperator</action>
+  </command>
+  <command>
+    <scheme>9 8</scheme>
+    <action>TestCommand</action>
+  </command>
+  <command>
+    <scheme>14</scheme>
+    <action>Clear</action>
   </command>
 </commandData>

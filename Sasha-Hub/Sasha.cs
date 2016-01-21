@@ -2,6 +2,7 @@
 {
     using System;
     using Sasha_Hub;
+    using System.Diagnostics;
     using System.IO;
     using System.Reflection;
     using System.Collections.Generic;
@@ -10,10 +11,12 @@
     internal static class Sasha
     {
         private const string SaidNothing = "Scared to say something meaningfull?";
-        private const string NullError = "String passed to Sasha.Command() can't be null!";
+        private const string NullError = "Overlaoded string on Sasha.Interpret() can't be null!";
         internal const string InternalErrorString = "error";
         private const string ErrorMessage = "Something went wrong. Brace yourself.";
-        private const string IForGotHow = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
+        private const string deadInside = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
+        private const string commandsNotSetUp = "It appears none of my commands are working. Guess I'll ahve to kill myself!";
+        private const string meh = "Meh. If you say say.";
         private enum Mood
         {
             Happy,
@@ -29,42 +32,65 @@
             Excited
         };
         private static Mood CurrentMood = Mood.Excited;
-        private static readonly commandData CommandData = (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml")); // Fuck your formating of comments bitch
+        private static commandData getCommandData() {
+            try
+            {
+                return (commandData)new XmlSerializer(typeof(commandData)).Deserialize(Assembly.GetExecutingAssembly().GetManifestResourceStream("Sasha_Hub.commandData.xml"));
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+        }
+        private static readonly commandData CommandData = getCommandData();
         internal static string Interpret(string message)
         {
-            if (message != null)
-            {
-                message = message.Trim();
-                if (message != "")
-                {
-                    string commandReturn = ProcessCommand(message);
-                    if (commandReturn != "")
-                    {
-                        return commandReturn;
+            try {
+                if(message != null) {
+                    if(CommandData != null) {
+                        message = message.Trim();
+                        if(message != "") {
+                            string commandReturn = ProcessCommand(message);
+                            if(commandReturn != "") {
+                                return commandReturn;
+                            }
+                        } else {
+                            return SaidNothing;
+                        }
+                    } else {
+                        return commandsNotSetUp;
                     }
+                } else {
+                    throw new Exception(NullError);
                 }
-                else
-                {
-                    return SaidNothing;
-                }
+                return ProcessChat(message);
+            } catch(Exception e) {
+                Debug.WriteLine(e.Message);
+                return deadInside;
             }
-            else
-            {
-                throw new Exception(NullError);
-            }
-            return ProcessChat(message);
         }
         private static string ProcessChat(string message)
         {
-            // I got sick of seeing that long ass comment XD
-            switch (CurrentMood)
-            {
-                case Mood.Confused:
-                    break;
-                case Mood.Excited:
-                    break;
+            char splitCharacter = Resources.chatdata.Substring(0,1)[0];
+            string[] fullArray = Resources.chatdata.Remove(0,1).Split(splitCharacter);
+            List<string[]> splitFullArray = new List<string[]>();
+            for(int i = 0;i < fullArray.Length-1;i+=2) {
+                splitFullArray.Add(new string[] {fullArray[i],fullArray[i+1]});
             }
-            return "I don't no how to smart just yet. Sorry.";
+            //todo: sort splitFullArray by the string length of the first value of the contained string arrays
+            foreach(string[] chatsubarray in splitFullArray) {
+                if(message.Trim().ToLowerInvariant().IndexOf(chatsubarray[0].Trim().ToLowerInvariant()) != -1) {
+                    string returnMessage = chatsubarray[1];
+                    switch(CurrentMood){
+                        //todo: setup system for replacing things like "{happyInsult}" or '{sadVerb}" depending on current mood. You get the idea
+                    }
+                    //todo: setup returnMessage metaData tags for changing moods
+                    //For instance, having {beAngry} at the end of a message in chatdata.txt could change the mood to angry
+                    return returnMessage;
+                }
+            }
+            return meh;
         }
         private static string ProcessCommand(string message)
         {
@@ -72,7 +98,7 @@
             if (submessages.Length <= 127)
             {
                 sbyte[] submessageTokens = new sbyte[submessages.Length];
-                for (int i = 0; i < submessageTokens.Length; i += 1)
+                for (byte i = 0; i < submessageTokens.Length; i += 1)
                 {
                     submessageTokens[i] = -1;
                 }
@@ -104,8 +130,6 @@
                 {
                     if (submessageTokenString == CommandData.Commands[i].scheme.Trim())
                     {
-                        try
-                        {
                             Type type = typeof(Commands);
                             MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
                             List<string> parameters = new List<string>();
@@ -120,15 +144,19 @@
                             }
                             else
                             {
-                                return (string)result;
+                                string methodResult = (string)result;
+                                if(methodResult != InternalErrorString)
+                                {
+                                    return methodResult;
+                                }
+                                else
+                                {
+                                    return ErrorMessage;
+                                }
                             }
                         }
-                        catch
-                        {
-                            return IForGotHow;
-                        }
                         break;
-                    }
+                    
                 }
             }
             return "";

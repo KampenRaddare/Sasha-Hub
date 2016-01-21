@@ -150,5 +150,11 @@
 
             return offensiveJokes[index];
         }
+        public void TestCommand(string eeeee) {
+            throw new Exception("TRY TO STOP THIS YOU BITCH HAHAHAHAHA");
+        }
+        public void Clear() {
+            //todo clear window chat
+        }
     }
 }

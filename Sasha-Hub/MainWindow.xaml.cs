@@ -10,14 +10,16 @@ namespace Sasha_Hub
 {
     public partial class MainWindow : Window
     {
-        private static BitmapImage sashaImage = new BitmapImage();
-        private static BitmapImage sashaLoadingImage = new BitmapImage();
+        private static BitmapImage sashaImage;
+        private static BitmapImage sashaLoadingImage;
         public MainWindow()
         {
             InitializeComponent();
             #region SETUP
-            if (sashaImage != null)
+            if (sashaImage == null)
             {
+                sashaImage = new BitmapImage();
+                sashaLoadingImage = new BitmapImage();
                 sashaLoadingImage.BeginInit();
                 sashaLoadingImage.UriSource = new Uri(@"pack://siteoforigin:,,,/Resources/SashaLoading.gif");
                 sashaLoadingImage.EndInit();
@@ -56,7 +58,7 @@ namespace Sasha_Hub
         private void Github_Click(object sender, RoutedEventArgs e)
         {
             // Takes user to Github Project
-            System.Diagnostics.Process.Start("https://github.com/KampenRaddare/Sasha-Hub");
+            Process.Start("https://github.com/KampenRaddare/Sasha-Hub");
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
@@ -76,28 +78,26 @@ namespace Sasha_Hub
         private void Say_Click(object sender, RoutedEventArgs e)
         {
             // Conversation Logic
-            if (SayBox.Text != "")
+            SayBox.Text = SayBox.Text.Trim();
+            string sashaMessage = Sasha.Interpret(SayBox.Text);
+            if(SayBox.Text != "") 
             {
                 ConversationViewer.Text += $"{Environment.NewLine}You: {SayBox.Text}";
-                string sashaMessage = Sasha.Interpret(SayBox.Text);
-                SayBox.Text = "";
-                if (sashaMessage != null)
-                { // If its null its a command that doesn't return a message, like opening a webpage, or help
-                    ToggleLoading();
-                    Thread thread = new Thread(delegate ()
-                    {
-                        Thread.Sleep(sashaMessage.Length * 25); // Jokes were taking WAY to long so I changed this. Sorry.
-                        this.Dispatcher.Invoke((Action)(() => {
-                            ConversationViewer.Text += $"{Environment.NewLine}Sasha: {sashaMessage}";
-                            ToggleLoading();
-                        }));
-                    });
-                    thread.Start();
-                }
             }
-            else
-            {
-                MessageBox.Show("You must say something!");
+            SayBox.Text = "";
+            if (sashaMessage != null)
+            { // If its null its a command that doesn't return a message, like opening a webpage, or help
+                ToggleLoading();
+                Thread thread = new Thread(delegate ()
+                {
+                    Thread.Sleep(sashaMessage.Length * 19); // Jokes were taking WAY to long so I changed this. Sorry.
+                    this.Dispatcher.Invoke((Action)(() => {
+                        ConversationViewer.Text += $"{Environment.NewLine}Sasha: {sashaMessage}";
+                        ConversationViewer.ScrollToEnd();
+                        ToggleLoading();
+                    }));
+                });
+                thread.Start();
             }
         }
     }
