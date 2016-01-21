@@ -13,8 +13,7 @@
   <token>stocks</token><!--10-->
   <token>joke</token><!--11-->
   <token>weather</token><!--12-->
-  <token>weather</token><!--13-->
-  <token>clear</token><!--14-->
+  <token>clear</token><!--13-->
   <!--! ONLY ADD NEW TOKENS ON THE LINE DIRECTLY ABOVE -->
   <command>
     <scheme>1</scheme> <!-- TOKEN CHAIN - SPACE SEPARATED NUMBERS -->
@@ -62,7 +61,7 @@
   </command>
   <command>
     <scheme>6 0 0</scheme>
-    <action>CalculateNoOperator</action>
+    <action>CalculateOperator</action>
   </command>
   <command>
     <scheme>6 0 0 0</scheme>
@@ -73,7 +72,7 @@
     <action>TestCommand</action>
   </command>
   <command>
-    <scheme>14</scheme>
+    <scheme>13</scheme>
     <action>Clear</action>
   </command>
 </commandData>

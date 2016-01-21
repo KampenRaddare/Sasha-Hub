@@ -7,7 +7,7 @@
         xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
-        Title="Sasha Hub" Height="350" Width="525" MinWidth="525" MinHeight="350" Icon="pack://siteoforigin:,,,/Resources/SashaPurpleIcon.png" IsTabStop="False" TabIndex="0" WindowStartupLocation="CenterScreen">
+        Title="Sasha Hub" Height="507" Width="729" MinWidth="525" MinHeight="350" Icon="pack://siteoforigin:,,,/Resources/SashaPurpleIcon.png" IsTabStop="False" TabIndex="0" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400*"/>
