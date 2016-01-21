@@ -3,6 +3,8 @@ using System.Windows;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using WpfAnimatedGif;
+using System.Xml;
+using System.Diagnostics;
 
 namespace Sasha_Hub
 {

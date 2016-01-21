@@ -104,9 +104,8 @@
                 {
                     if (submessageTokenString == CommandData.Commands[i].scheme.Trim())
                     {
-                        // Only removed to see specific error thrown
-                        //try
-                        //{
+                        try
+                        {
                             Type type = typeof(Commands);
                             MethodInfo method = type.GetMethod(CommandData.Commands[i].action.Trim());
                             List<string> parameters = new List<string>();
@@ -123,11 +122,11 @@
                             {
                                 return (string)result;
                             }
-                        //}
-                        //catch
-                        //{
-                         //   return IForGotHow;
-                        //}
+                        }
+                        catch
+                        {
+                            return IForGotHow;
+                        }
                         break;
                     }
                 }

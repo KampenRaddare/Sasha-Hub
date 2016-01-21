@@ -62,22 +62,29 @@
         }
         public string Weather(string location)
         {
-            // IP location->web service->weather service->xml->process | Me can do it later I guess
+            // IP location->web service->weather service->xml->process
             string day = DateTime.Now.DayOfWeek.ToString();
             string temp = null;
             string high = null;
             string low = null;
 
             XmlDocument weather = new XmlDocument();
-            weather.Load(string.Format("http://www.google.com/ig/api?weather={0}", "Chicago"));
+            try
+            {
+                // OpenWeatherMap is the only free one. Had to sign up for this shit. -_-
+                weather.Load("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&mode=xml&appid=" + "c935b4d2f656287244686656ffbe337b");
+            }
+            catch
+            {
+                return "That city does not exist. You expect me to find the weather for it?";
+            }
 
-            temp = weather.SelectSingleNode("/xml_api_reply/weather/current_conditions/temp_f").Attributes["data"].InnerText;
-            high = weather.SelectSingleNode("high").Attributes["data"].InnerText;
-            low = weather.SelectSingleNode("low").Attributes["data"].InnerText;
+            XmlNode current = weather.SelectSingleNode("current");
+            XmlNode temperature = current.SelectSingleNode("temperature");
 
-            Debug.WriteLine(temp);
-            Debug.WriteLine(high);
-            Debug.WriteLine(low);
+            temp = temperature.Attributes["value"].Value;
+            high = temperature.Attributes["max"].Value;
+            low = temperature.Attributes["min"].Value;
 
             return "It is " + temp + "F in your city. With a high of " + high + " and a low of " + low;
         }
