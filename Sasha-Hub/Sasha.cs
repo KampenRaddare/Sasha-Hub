@@ -30,7 +30,7 @@
             Confused,
             Excited
         };
-        private static Mood CurrentMood = Mood.Excited;
+        private static Mood CurrentMood = Mood.Excited; // Why do this? Why not just pick from the enum?
         private static commandData getCommandData()
         {
             try
@@ -88,7 +88,7 @@
             {
                 splitFullArray.Add(new string[] { fullArray[i], fullArray[i + 1] });
             }
-            //todo: sort splitFullArray by the string length of the first value of the contained string arrays
+            // TODO: Sort splitFullArray by the string length of the first value of the contained string arrays
             foreach (string[] chatsubarray in splitFullArray)
             {
                 if (message.Trim().ToLowerInvariant().IndexOf(chatsubarray[0].Trim().ToLowerInvariant()) != -1)
@@ -96,10 +96,37 @@
                     string returnMessage = chatsubarray[1];
                     switch (CurrentMood)
                     {
-                        //todo: setup system for replacing things like "{happyInsult}" or '{sadVerb}" depending on current mood. You get the idea
+                        // TODO: Setup system for replacing things like "{happyInsult}" or '{sadVerb}" depending on current mood. You get the idea
+                        case Mood.Happy:
+                            break;
+                        case Mood.Confused:
+                            break;
+                        case Mood.Excited:
+                            break;
+                        case Mood.Flirty:
+                            break;
+                        case Mood.Sad:
+                            break;
+                        case Mood.Loving:
+                            break;
+                        case Mood.Sick:
+                            break;
+                        case Mood.Silly:
+                            break;
+                        case Mood.Sleepy:
+                            break;
+                        case Mood.Smug:
+                            break;
+                        case Mood.Tipsy:
+                            break;
+                        default:
+                            return deadInside;
+                            break;
+
                     }
-                    //todo: setup returnMessage metaData tags for changing moods
-                    //For instance, having {beAngry} at the end of a message in chatdata.txt could change the mood to angry
+                    // TODO: Setup returnMessage metaData tags for changing moods
+                    // For instance, having {beAngry} at the end of a message in chatdata.txt could change the mood to angry
+
                     return returnMessage;
                 }
             }
