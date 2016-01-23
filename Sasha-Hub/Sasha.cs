@@ -15,7 +15,7 @@
         internal const string InternalErrorString = "error";
         private const string ErrorMessage = "Something went wrong. Brace yourself.";
         private const string deadInside = "I think something just broke inside of me. I'm sure I'll be fine! *dies*";
-        private const string meh = "Meh. If you say so."; // That said "say say" Good one.
+        private const string meh = "Meh. If you say so.";
         private enum Mood
         {
             Happy,
